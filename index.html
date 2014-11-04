@@ -10,13 +10,15 @@
         <link rel="shortcut icon" href="http://farmingconcrete.org/barn/static/img/favicon.ico" />
 
         <link rel="stylesheet" type="text/css" href="http://farmingconcrete.org/barn/static/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
         <link rel="stylesheet" type="text/css" href="bower_components/pickadate/lib/themes/classic.css" />
         <link rel="stylesheet" type="text/css" href="bower_components/pickadate/lib/themes/classic.date.css" />
-        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link rel="stylesheet" type="text/css" href="bower_components/select2/select2.css" />
 
         <script src="https://code.jquery.com/jquery-git2.min.js"></script>
         <script src="bower_components/pickadate/lib/picker.js"></script>
         <script src="bower_components/pickadate/lib/picker.date.js"></script>
+        <script src="bower_components/select2/select2.min.js"></script>
         <script src="js/index.js"></script>
     </head>
     <body class="main-index-page">
@@ -60,15 +62,18 @@
                         <div class="row filters-row">
                             <h2>Filters</h2>
                             <div class="row filters-row filters-geo-row">
+                                <div class="col-md-1">
+                                    Where
+                                </div>
                                 <div class="col-md-3">
-                                    <select class="form-control">
+                                    <select>
                                         <option>Select a state</option>
                                         <option>NY</option>
                                         <option>PA</option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
-                                    <select class="form-control">
+                                    <select>
                                         <option>Select a city</option>
                                         <optgroup label="New York City">
                                             <option>All boroughs</option>
@@ -83,7 +88,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-3">
-                                    <select class="form-control">
+                                    <select>
                                         <option>Select a zip code</option>
                                         <option>11111</option>
                                         <option>11112</option>
@@ -92,26 +97,63 @@
                                 </div>
                             </div>
                             <div class="row filters-row filters-metrics-row">
+                                <div class="col-md-1">
+                                    Metrics
+                                </div>
                                 <div class="col-md-6">
-                                    <select class="form-control">
+                                    <select multiple>
                                         <option>Select metrics</option>
-                                        <option>11111</option>
-                                        <option>11112</option>
-                                        <option>11113</option>
+                                        <optgroup label="Food Production Data">
+                                            <option>Crop Count</option>
+                                            <option>Harvest Count</option>
+                                        </optgroup>
+                                        <optgroup label="Environmental Data">
+                                            <option>Compost Production by Volume</option>
+                                            <option>Compost Production by Weight</option>
+                                            <option>Landfill Waste Diversion by Volume</option>
+                                            <option>Landfill Waste Diversion by Weight</option>
+                                            <option>Rainwater Harvesting</option>
+                                        </optgroup>
+                                        <optgroup label="Social Data">
+                                            <option>Participation by Geography</option>
+                                            <option>Participation by Task</option>
+                                            <option>Participation by Project</option>
+                                            <option>Skills &amp; Knowledge in the Garden</option>
+                                            <option>Reach of Programs</option>
+                                        </optgroup>
+                                        <optgroup label="Health Data">
+                                            <option>Changes in Attitude: Yum &amp; Yuck</option>
+                                            <option>Good Moods in the Garden</option>
+                                            <option>Healthy Eating</option>
+                                            <option>Beauty of the Garden</option>
+                                        </optgroup>
+                                        <optgroup label="Economic Data">
+                                            <option>Donations of Food</option>
+                                            <option>Market Sales</option>
+                                        </optgroup>
                                     </select>
                                 </div>
                             </div>
                             <div class="row filters-row filters-dates-row">
+                                <div class="col-md-1">
+                                    When
+                                </div>
                                 <div class="col-md-3">
                                     <input type="date" class="form-control" />
+                                </div>
+                                <div class="col-md-1">
+                                    to
                                 </div>
                                 <div class="col-md-3">
                                     <input type="date" class="form-control" />
                                 </div>
                             </div>
                             <div class="row filters-row filters-groups-row">
+                                <div class="col-md-1">
+                                    Groups
+                                </div>
                                 <div class="col-md-3">
-                                    <select class="form-control">
+                                    <select>
                                         <option>Select groups</option>
                                         <option>BQLT</option>
                                         <option>NYRP</option>
@@ -119,8 +161,11 @@
                                 </div>
                             </div>
                             <div class="row filters-row filters-types-row">
+                                <div class="col-md-1">
+                                    Garden types
+                                </div>
                                 <div class="col-md-3">
-                                    <select class="form-control">
+                                    <select>
                                         <option>Select garden types</option>
                                         <option>community garden</option>
                                         <option>urban farm</option>
