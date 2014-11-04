@@ -1,0 +1,23 @@
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.mill-explanation-row {
+    border-bottom: 1px dotted black;
+}
+
+.filters-row {
+    margin-bottom: 15px;
+    margin-top: 5px;
+    padding: 5px;
+}
+
+.data-summary {
+    height: 500px;
+}
+
+.data-summary-actions {
+    margin-top: 15px;
+    text-align: center;
+}

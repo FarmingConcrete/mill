@@ -1,8 +1,139 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <title>Farming Concrete: Mill</title>
+        <title>Farming Concrete Mill: Home</title>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" href="http://farmingconcrete.org/barn/static/img/favicon.ico" />
+        <link rel="shortcut icon" href="http://farmingconcrete.org/barn/static/img/favicon.ico" />
+
+        <link rel="stylesheet" type="text/css" href="http://farmingconcrete.org/barn/static/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
     </head>
-    <body>
-        <h1>Farming Concrete Mill</h1>
+    <body class="main-index-page">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1 col-sm-10 col-sm-offset-1" data-role="page">
+                <header>
+                    <a href="/"><img src="http://farmingconcrete.org/barn/static/img/barn_logo.png" /></a>
+
+                    <nav id="nav" class="navbar navbar-default" role="navigation">
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+
+                            <div id="navbar-collapse" class="collapse navbar-collapse">
+                                <ul class="nav navbar-nav">
+                                    <li><a class="active" href="/mill/">mill</a></li>
+                                    <li><a href="/about/">about</a></li>
+                                    <li><a href="/barn/">barn</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </header>
+
+                <main id="main" data-role="content">
+                    <div id="content">
+                        <div class="row mill-explanation-row">
+                            <div id="left">
+                                <section id="intro-text">
+                                    <p> Welcome to the <a href="http://farmingconcrete.org">Farming Concrete</a> Mill, where you can download data stored in the <a href="/barn/">Barn</a>. The data was collected with the <a href="/barn/data-collection-toolkit/">Five Borough Farm Data Collection Toolkit</a>, developed by the Design Trust for Public Space in collaboration with Farming Concrete.</p>
+                                </section>
+                            </div>
+                        </div>
+
+                        <div class="row filters-row">
+                            <h2>Filters</h2>
+                            <div class="row filters-row filters-geo-row">
+                                <div class="col-md-3">
+                                    <select class="form-control">
+                                        <option>Select a state</option>
+                                        <option>NY</option>
+                                        <option>PA</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <select class="form-control">
+                                        <option>Select a city</option>
+                                        <optgroup label="New York City">
+                                            <option>All boroughs</option>
+                                            <option>Bronx</option>
+                                            <option>Brooklyn</option>
+                                            <option>Manhattan</option>
+                                            <option>Queens</option>
+                                            <option>Staten Island</option>
+                                        </optgroup>
+                                        <option>Buffalo</option>
+                                        <option>Rochester</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <select class="form-control">
+                                        <option>Select a zip code</option>
+                                        <option>11111</option>
+                                        <option>11112</option>
+                                        <option>11113</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row filters-row filters-metrics-row">
+                                <div class="col-md-6">
+                                    <select class="form-control">
+                                        <option>Select metrics</option>
+                                        <option>11111</option>
+                                        <option>11112</option>
+                                        <option>11113</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row filters-row filters-dates-row">
+                                <div class="col-md-3">
+                                    <input type="date" class="form-control" />
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="date" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row filters-row filters-groups-row">
+                                <div class="col-md-3">
+                                    <select class="form-control">
+                                        <option>Select groups</option>
+                                        <option>BQLT</option>
+                                        <option>NYRP</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row filters-row filters-types-row">
+                                <div class="col-md-3">
+                                    <select class="form-control">
+                                        <option>Select garden types</option>
+                                        <option>community garden</option>
+                                        <option>urban farm</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <a class="btn btn-primary" href="view.html">go</a>
+                        </div>
+                    </div>
+                </main>
+
+                <footer>
+                    <a href="http://farmingconcrete.org"><img id="farming-concrete-logo" title="Farming Concrete" src="http://farmingconcrete.org/barn/static/img/fc_logo_footer.jpg" /></a>
+                    <a href="http://www.fiveboroughfarm.org/"><img id="fbf-logo" title="Five Borough Farm" src="http://farmingconcrete.org/barn/static/img/fbf_logo_footer.jpg" /></a>, a project of the <a href="http://www.designtrust.org/">Design Trust for Public Space</a>.
+                    <a href="http://creativecommons.org/licenses/by-sa/4.0/" class="pull-right"><img src="http://farmingconcrete.org/barn/static/img/cc.png" /></a>
+                </footer>
+
+            </div>
+        </div>
     </body>
 </html>
+
