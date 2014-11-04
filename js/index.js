@@ -4,4 +4,8 @@ $(document).ready(function () {
     });
 
     $('select').select2();
+
+    $(':input[name=state]').change(function () {
+        $(':input[name=city],:input[name=zip]').prop('disabled', $(this).val() === '');
+    });
 });
