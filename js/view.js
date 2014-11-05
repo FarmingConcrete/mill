@@ -145,4 +145,12 @@ $(document).ready(function () {
         var $chart = $(this).parentsUntil('.tab-pane').find('.chart');
         makeChart($chart, asObjects(data));
     });
+
+    $('.btn-download').click(function () {
+        alert('Not implemented yet! Will be an Excel file with all the data.');
+    });
+
+    $('.btn-hide').click(function () {
+        alert('Not implemented yet! Will hide filters to emphasize data more.');
+    });
 });
