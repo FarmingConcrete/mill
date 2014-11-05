@@ -28,3 +28,14 @@
     margin-top: 15px;
     text-align: center;
 }
+
+.axis {
+    font: 12px sans-serif;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
