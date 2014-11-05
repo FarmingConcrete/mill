@@ -18,6 +18,12 @@
     padding: 15px;
 }
 
+.filters-item-row {
+    padding: 5px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
 .data-summary-actions {
     margin-top: 15px;
     text-align: center;
