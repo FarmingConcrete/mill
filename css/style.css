@@ -3,14 +3,19 @@
     margin-right: 0;
 }
 
+.overview-row,
 .mill-explanation-row {
     border-bottom: 1px dotted black;
+}
+
+.overview-row {
+    padding: 15px;
 }
 
 .filters-row {
     margin-bottom: 15px;
     margin-top: 5px;
-    padding: 5px;
+    padding: 15px;
 }
 
 .data-summary-actions {
