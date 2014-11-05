@@ -144,6 +144,5 @@ $(document).ready(function () {
 
         var $chart = $(this).parentsUntil('.tab-pane').find('.chart');
         makeChart($chart, asObjects(data));
-
     });
 });
