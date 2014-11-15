@@ -45,7 +45,7 @@ function makeChart($chart, data) {
     height = 250 - margin.top - margin.bottom;
 
     // Our X scale
-    var x = d3.scale.ordinal().rangeRoundBands([0, width], .1);
+    var x = d3.scale.ordinal().rangeRoundBands([0, width], 0.1);
 
     // Our Y scale
     var y = d3.scale.linear().rangeRound([height, 0]);

@@ -25,6 +25,14 @@ module.exports = function(grunt) {
             }
         },
 
+        jshint: {
+            all: {
+                files: {
+                    src: ["js/*.js", "!js/bundle.js"]
+                }
+            }
+        },
+
         less: {
             development: {
                 options: {
@@ -43,6 +51,11 @@ module.exports = function(grunt) {
                 tasks: ["browserify"]
             },
 
+            jshint: {
+                files: ["js/*.js", "!bundle.js"],
+                tasks: ["jshint"]
+            },
+
             less: {
                 files: ["css/**/*.less"],
                 tasks: ["less", "cssmin"]
@@ -53,6 +66,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
