@@ -1,5 +1,16 @@
 module.exports = function(grunt) {
     grunt.initConfig({
+        assemble: {
+            options: {
+                flatten: true,
+                layout: ['templates/layout.hbs']
+            },
+            site: {
+                dest: './',
+                src: ['templates/**/*.hbs', '!templates/layout.hbs']
+            }
+        },
+
         browserify: {
             standalone: {
                 options: {
@@ -46,6 +57,11 @@ module.exports = function(grunt) {
         },
 
         watch: {
+            assemble: {
+                files: ["templates/*.hbs"],
+                tasks: ["assemble"]
+            },
+
             browserify: {
                 files: ["js/*.js", "!js/bundle.js"],
                 tasks: ["browserify"]
@@ -63,6 +79,7 @@ module.exports = function(grunt) {
         }
     });
 
+    grunt.loadNpmTasks('assemble');
     grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
