@@ -1,3 +1,10 @@
+var _ = require('../bower_components/underscore/underscore-min'),
+    moment = require('../bower_components/moment/min/moment.min');
+
+require('../bower_components/bootstrap/js/tab');
+require('../bower_components/datatables/media/js/jquery.dataTables.min');
+
+
 function createFakeDataset() {
     var dataSet = [],
         currentDate = moment('2014-01-01'),
@@ -124,33 +131,35 @@ function makeChart($chart, data) {
             });
 }
 
-$(document).ready(function () {
-    $('.metric-table').each(function () {
-        var columns = [
-            { "title": "Recorded" },
-            { "title": $(this).data('number-label') }
-        ];
-        if ($(this).data('crops')) {
-            columns.push({ "title": "Crop" });
-        }
-        var data = createFakeDataset();
-        $(this).dataTable({
-            columns: columns,
-            data: data,
-            lengthChange: false,
-            pageLength: 5,
-            searching: false
+module.exports = {
+    init: function () {
+        $('.metric-table').each(function () {
+            var columns = [
+                { "title": "Recorded" },
+                { "title": $(this).data('number-label') }
+            ];
+            if ($(this).data('crops')) {
+                columns.push({ "title": "Crop" });
+            }
+            var data = createFakeDataset();
+            $(this).dataTable({
+                columns: columns,
+                data: data,
+                lengthChange: false,
+                pageLength: 5,
+                searching: false
+            });
+
+            var $chart = $(this).parentsUntil('.tab-pane').find('.chart');
+            makeChart($chart, asObjects(data));
         });
 
-        var $chart = $(this).parentsUntil('.tab-pane').find('.chart');
-        makeChart($chart, asObjects(data));
-    });
+        $('.btn-download').click(function () {
+            alert('Not implemented yet! Will be an Excel file with all the data.');
+        });
 
-    $('.btn-download').click(function () {
-        alert('Not implemented yet! Will be an Excel file with all the data.');
-    });
-
-    $('.btn-hide').click(function () {
-        alert('Not implemented yet! Will hide filters to emphasize data more.');
-    });
-});
+        $('.btn-hide').click(function () {
+            alert('Not implemented yet! Will hide filters to emphasize data more.');
+        });
+    }
+};

@@ -1,0 +1,40 @@
+@import "barn.less";
+@import (inline) "../bower_components/datatables/media/css/jquery.dataTables.min.css";
+@import (inline) "../bower_components/pickadate/lib/themes/classic.css";
+@import (inline) "../bower_components/pickadate/lib/themes/classic.date.css";
+@import (inline) "../bower_components/select2/select2.css";
+
+@import "overrides/datatables.less";
+
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.overview-row,
+.mill-explanation-row {
+    border-bottom: 1px dotted black;
+}
+
+.overview-row {
+    padding: 15px;
+}
+
+.filters-row {
+    margin-bottom: 15px;
+    margin-top: 5px;
+    padding: 15px;
+}
+
+.filters-item-row {
+    padding: 5px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.data-summary-actions {
+    margin-top: 15px;
+    text-align: center;
+}
+
+@import "view.less";
