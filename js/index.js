@@ -5,6 +5,20 @@ require('../bower_components/select2/select2.min');
 
 var initViewPage = require('./view').init;
 
+function getViewFilters() {
+    var filters = {};
+    $('.filters-form :input[name]').each(function () {
+        if ($(this).val() !== '') {
+            filters[$(this).attr('name')] = $(this).val();  
+        }
+    });
+    return filters;
+}
+
+function getViewQueryString() {
+    return $.param(getViewFilters()).replace(/(?:%5B|%5D)/g, '');
+}
+
 function initIndexPage() {
     $(':input[type=date]').pickadate({
         format: 'm/d/yy'
@@ -14,6 +28,11 @@ function initIndexPage() {
 
     $(':input[name=state]').change(function () {
         $(':input[name=city],:input[name=zip]').prop('disabled', $(this).val() === '');
+    });
+
+    $('.btn-submit').click(function () {
+        var url = $(this).attr('href') + '?' + getViewQueryString();
+        $('.btn-submit').attr('href', url);
     });
 }
 

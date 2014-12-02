@@ -1,24 +1,51 @@
 var _ = require('../bower_components/underscore/underscore-min'),
-    moment = require('../bower_components/moment/min/moment.min');
+    moment = require('../bower_components/moment/min/moment.min'),
+    Handlebars = require('../bower_components/handlebars/handlebars.runtime');
+
+var templates = require('../templates/dynamic/compiled')(Handlebars),
+    tabsTemplate = templates['view-tabs.hbs'];
 
 require('../bower_components/bootstrap/js/tab');
 require('../bower_components/datatables/media/js/jquery.dataTables.min');
 
 
 function createFakeDataset() {
-    var dataSet = [],
-        currentDate = moment('2014-01-01'),
-        crops = ['corn', 'peppers (hot)', 'tomatoes'];
+    function fakeRecords() {
+        var dataSet = [],
+            currentDate = moment('2014-01-01'),
+            crops = ['corn', 'peppers (hot)', 'tomatoes'];
+        _.each(_.range(_.random(75)), function () {
+            currentDate = currentDate.add(_.random(3), 'days');
+            dataSet.push([
+                currentDate.format('M/D/YY'),
+                _.random(5),
+                _.sample(crops)
+            ]);
+        });
+        return dataSet;
+    }
 
-    _.each(_.range(_.random(75)), function () {
-        currentDate = currentDate.add(_.random(3), 'days');
-        dataSet.push([
-            currentDate.format('M/D/YY'),
-            _.random(5),
-            _.sample(crops)
-        ]);
-    });
-    return dataSet;
+    return {
+        results: {
+            gardens: {
+                count: 5
+            },
+            metrics: [
+                {
+                    name: 'Crop Count',
+                    records: fakeRecords()
+                },
+                {
+                    name: 'Harvest Count',
+                    records: fakeRecords()
+                },
+                {
+                    name: 'Compost by Weight',
+                    records: fakeRecords()
+                }
+            ]   
+        }
+    };
 }
 
 function asObjects(data) {
@@ -131,27 +158,46 @@ function makeChart($chart, data) {
             });
 }
 
+function loadData() {
+    var barnBase = 'http://localhost:8000',
+        endpoint = '/api/records/',
+        url = barnBase + endpoint + window.location.search;
+    return $.getJSON(url);
+}
+
 module.exports = {
     init: function () {
-        $('.metric-table').each(function () {
+        var data = createFakeDataset();
+
+        // Create tabs for each metric
+        var slugMetrics = _.map(data.results.metrics, function (metric) {
+            return {
+                slug: metric.name.replace(/ /g, '-').toLowerCase(),
+                name: metric.name
+            };
+        });
+        $('.data-summary').append(tabsTemplate({ metrics: slugMetrics }));
+        $('.data-summary .nav-tabs a:first').tab('show');
+
+        // Populate tabs
+        _.each(data.results.metrics, function (m) {
+            var $tab = $('#' + m.name.replace(/ /g, '-').toLowerCase());
+
             var columns = [
                 { "title": "Recorded" },
-                { "title": $(this).data('number-label') }
+                { "title": "Pounds" },
+                { "title": "Crop" }
             ];
-            if ($(this).data('crops')) {
-                columns.push({ "title": "Crop" });
-            }
-            var data = createFakeDataset();
-            $(this).dataTable({
+            $tab.find('.metric-table').dataTable({
                 columns: columns,
-                data: data,
+                data: m.records,
                 lengthChange: false,
                 pageLength: 5,
                 searching: false
             });
 
-            var $chart = $(this).parentsUntil('.tab-pane').find('.chart');
-            makeChart($chart, asObjects(data));
+            var $chart = $tab.find('.chart');
+            makeChart($chart, asObjects(m.records));
         });
 
         $('.btn-download').click(function () {

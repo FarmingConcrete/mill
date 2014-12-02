@@ -7,7 +7,7 @@ module.exports = function(grunt) {
             },
             site: {
                 dest: './',
-                src: ['templates/**/*.hbs', '!templates/layout.hbs']
+                src: ['templates/*.hbs', '!templates/layout.hbs']
             }
         },
 
@@ -33,6 +33,20 @@ module.exports = function(grunt) {
             minify: {
                 src: 'css/style.css',
                 dest: 'css/style.min.css'
+            }
+        },
+
+        handlebars: {
+            compile: {
+                files: {
+                    "templates/dynamic/compiled.js" : "templates/dynamic/*.hbs"
+                },
+                options: {
+                    commonjs: true,
+                    processName: function (filename) {
+                        return filename.split('/').slice(-1);
+                    }
+                }
             }
         },
 
@@ -67,6 +81,11 @@ module.exports = function(grunt) {
                 tasks: ["browserify"]
             },
 
+            handlebars: {
+                files: ["templates/dynamic/*.hbs"],
+                tasks: ["handlebars"]
+            },
+
             jshint: {
                 files: ["js/*.js", "!bundle.js"],
                 tasks: ["jshint"]
@@ -83,6 +102,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-handlebars');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-watch');
