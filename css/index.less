@@ -1,0 +1,59 @@
+.overview-list {
+    .make-row();
+    padding-bottom: 40px;
+    padding-top: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    &-item {
+        .make-sm-column(3);
+        text-align: center;
+
+        &-counting {
+            color: @garden-color;
+            font-weight: bold;
+            margin-top: 60px;
+        }
+
+        &-number {
+            .summary-callout-number();
+        }
+
+        &-label {
+            .summary-callout-label();
+        }
+    }
+}
+
+.filters {
+    &-item {
+        margin-bottom: 20px;
+        margin-top: 10px;
+    }
+
+    &-item-inputs {
+        .make-row(0);
+
+        :first-child {
+            padding-left: 0;
+        }
+    }
+
+    &-item-label {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    &-dates-row {
+        .make-row();
+
+        &-item {
+            .make-sm-column(3);
+        }
+    }
+
+    &-actions {
+        border-top: @separator-border;
+        padding-top: 20px;
+    }
+}

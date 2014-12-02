@@ -54,132 +54,161 @@
         </div>
     </div>
 
-    <div class="row overview-row">
+    <section class="overview">
         <h2><img src="../img/overview.jpg" /></h2>
-        <ul>
-            <li><strong>500 gardens</strong> recording data</li>
-            <li><strong>500,000 pounds</strong> of food harvested</li>
-            <li><strong>200,000 pounds</strong> of compost</li>
-        </ul>
-        <p>...and counting!</p>
-    </div>
+        <div class="overview-list">
+            <div class="overview-list-item">
+                <div class="overview-list-item-number">501</div>
+                <div class="overview-list-item-label">gardens recording data</div>
+            </div>
+            <div class="overview-list-item">
+                <div class="overview-list-item-number">500,000</div>
+                <div class="overview-list-item-label">pounds of food harvested</div>
+            </div>
+            <div class="overview-list-item">
+                <div class="overview-list-item-number">200,000</div>
+                <div class="overview-list-item-label">pounds of compost</div>
+            </div>
+            <div class="overview-list-item overview-list-item-counting">and counting!</div>
+        </div>
+    </section>
 
-    <form class="row filters-row filters-form">
-        <h2><img src="../img/download_data.jpg" /></h2>
-        <div class="row filters-item-row filters-metrics-row">
-            <div class="col-md-2">
-                Metrics
+    <section class="filters">
+        <form class="filters-form">
+            <h2><img src="../img/download_data.jpg" /></h2>
+            <div class="filters-item filters-metrics-row">
+                <div class="filters-item-label">
+                    Metrics:
+                </div>
+                <div class="filters-item-inputs">
+                    <div class="col-md-6">
+                        <select name="metric" multiple>
+                            <option value="">Select metrics</option>
+                            <optgroup label="Food Production Data">
+                                <option>Crop Count</option>
+                                <option>Harvest Count</option>
+                            </optgroup>
+                            <optgroup label="Environmental Data">
+                                <option>Compost Production by Volume</option>
+                                <option>Compost Production by Weight</option>
+                                <option>Landfill Waste Diversion by Volume</option>
+                                <option>Landfill Waste Diversion by Weight</option>
+                                <option>Rainwater Harvesting</option>
+                            </optgroup>
+                            <optgroup label="Social Data">
+                                <option>Participation by Geography</option>
+                                <option>Participation by Task</option>
+                                <option>Participation by Project</option>
+                                <option>Skills &amp; Knowledge in the Garden</option>
+                                <option>Reach of Programs</option>
+                            </optgroup>
+                            <optgroup label="Health Data">
+                                <option>Changes in Attitude: Yum &amp; Yuck</option>
+                                <option>Good Moods in the Garden</option>
+                                <option>Healthy Eating</option>
+                                <option>Beauty of the Garden</option>
+                            </optgroup>
+                            <optgroup label="Economic Data">
+                                <option>Donations of Food</option>
+                                <option>Market Sales</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-6">
-                <select name="metric" multiple>
-                    <option value="">Select metrics</option>
-                    <optgroup label="Food Production Data">
-                        <option>Crop Count</option>
-                        <option>Harvest Count</option>
-                    </optgroup>
-                    <optgroup label="Environmental Data">
-                        <option>Compost Production by Volume</option>
-                        <option>Compost Production by Weight</option>
-                        <option>Landfill Waste Diversion by Volume</option>
-                        <option>Landfill Waste Diversion by Weight</option>
-                        <option>Rainwater Harvesting</option>
-                    </optgroup>
-                    <optgroup label="Social Data">
-                        <option>Participation by Geography</option>
-                        <option>Participation by Task</option>
-                        <option>Participation by Project</option>
-                        <option>Skills &amp; Knowledge in the Garden</option>
-                        <option>Reach of Programs</option>
-                    </optgroup>
-                    <optgroup label="Health Data">
-                        <option>Changes in Attitude: Yum &amp; Yuck</option>
-                        <option>Good Moods in the Garden</option>
-                        <option>Healthy Eating</option>
-                        <option>Beauty of the Garden</option>
-                    </optgroup>
-                    <optgroup label="Economic Data">
-                        <option>Donations of Food</option>
-                        <option>Market Sales</option>
-                    </optgroup>
-                </select>
-            </div>
-        </div>
-        <div class="row filters-item-row filters-geo-row">
-            <div class="col-md-2">
-                Where
-            </div>
-            <div class="col-md-3">
-                <select name="state">
-                    <option value="">Select a state</option>
-                    <option>NY</option>
-                    <option>PA</option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <select name="city" disabled>
-                    <option value="">Select a city</option>
-                    <optgroup label="New York City">
-                        <option>All boroughs</option>
-                        <option>Bronx</option>
-                        <option>Brooklyn</option>
-                        <option>Manhattan</option>
-                        <option>Queens</option>
-                        <option>Staten Island</option>
-                    </optgroup>
-                    <option>Buffalo</option>
-                    <option>Rochester</option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <select name="zip" disabled>
-                    <option value="">Select a zip code</option>
-                    <option>11111</option>
-                    <option>11112</option>
-                    <option>11113</option>
-                </select>
-            </div>
-        </div>
-        <div class="row filters-item-row filters-dates-row">
-            <div class="col-md-2">
-                When
-            </div>
-            <div class="col-md-3">
-                <input name="start" type="date" class="form-control" />
-            </div>
-            <div class="col-md-2">
-                to
-            </div>
-            <div class="col-md-3">
-                <input name="end" type="date" class="form-control" />
-            </div>
-        </div>
-        <div class="row filters-item-row filters-groups-row">
-            <div class="col-md-2">
-                Groups
-            </div>
-            <div class="col-md-3">
-                <select name="group">
-                    <option value="">Select group</option>
-                    <option>BQLT</option>
-                    <option>NYRP</option>
-                </select>
-            </div>
-        </div>
-        <div class="row filters-item-row filters-types-row">
-            <div class="col-md-2">
-                Garden types
-            </div>
-            <div class="col-md-3">
-                <select name="garden_type">
-                    <option value="">Select garden type</option>
-                    <option>community garden</option>
-                    <option>urban farm</option>
-                </select>
-            </div>
-        </div>
 
-        <a class="btn btn-primary btn-submit" href="view.html">go</a>
-    </form>
+            <div class="filters-item filters-geo-row">
+                <div class="filters-item-label">
+                    Where:
+                </div>
+                <div class="filters-item-inputs">
+                    <div class="col-md-3">
+                        <select name="state">
+                            <option value="">Select a state</option>
+                            <option>NY</option>
+                            <option>PA</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <select name="city" disabled>
+                            <option value="">Select a city</option>
+                            <optgroup label="New York City">
+                                <option>All boroughs</option>
+                                <option>Bronx</option>
+                                <option>Brooklyn</option>
+                                <option>Manhattan</option>
+                                <option>Queens</option>
+                                <option>Staten Island</option>
+                            </optgroup>
+                            <option>Buffalo</option>
+                            <option>Rochester</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <select name="zip" disabled>
+                            <option value="">Select a zip code</option>
+                            <option>11111</option>
+                            <option>11112</option>
+                            <option>11113</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filters-item filters-dates-row">
+                <div class="filters-dates-row-item">
+                    <div class="filters-item-label">
+                        Start date:
+                    </div>
+                    <div class="filters-item-inputs">
+                        <input name="start" type="date" class="form-control" />
+                    </div>
+                </div>
+                <div class="filters-dates-row-item">
+                    <div class="filters-item-label">
+                        End date:
+                    </div>
+                    <div class="filters-item-inputs">
+                        <input name="end" type="date" class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="filters-item filters-groups-row">
+                <div class="filters-item-label">
+                    Groups:
+                </div>
+                <div class="filters-item-inputs">
+                    <div class="col-md-3">
+                        <select name="group">
+                            <option value="">Select group</option>
+                            <option>BQLT</option>
+                            <option>NYRP</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filters-item filters-types-row">
+                <div class="filters-item-label">
+                    Garden types:
+                </div>
+                <div class="filters-item-inputs">
+                    <div class="col-md-3">
+                        <select name="garden_type">
+                            <option value="">Select garden type</option>
+                            <option>community garden</option>
+                            <option>urban farm</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filters-actions">
+                <a class="btn btn-primary btn-submit" href="view.html">go</a>
+            </div>
+        </form>
+    </section>
 </div>
 
                 </main>
