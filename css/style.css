@@ -7642,10 +7642,6 @@ table.dataTable thead .sorting_desc_disabled {
   margin-left: 0;
   margin-right: 0;
 }
-.overview-row,
-.mill-explanation-row {
-  border-bottom: 1px dotted black;
-}
 .overview-row {
   padding: 15px;
 }
@@ -7662,6 +7658,10 @@ table.dataTable thead .sorting_desc_disabled {
 .data-summary-actions {
   margin-top: 15px;
   text-align: center;
+}
+h2 {
+  border-top: 1px solid #404040;
+  border-bottom: 1px dotted #8c8c8c;
 }
 .axis {
   font: 12px sans-serif;
