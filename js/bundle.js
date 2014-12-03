@@ -3118,7 +3118,13 @@ module.exports = {
         });
 
         $('.btn-hide').click(function () {
-            alert('Not implemented yet! Will hide filters to emphasize data more.');
+            $('.filters-container').addClass('hidden');
+            $('.btn-show').removeClass('hidden');
+        });
+
+        $('.btn-show').click(function () {
+            $('.filters-container').removeClass('hidden');
+            $('.btn-show').addClass('hidden');
         });
     }
 };
