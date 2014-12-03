@@ -47,32 +47,43 @@
                     
 <h2><img src="img/view_results.jpg" /></h2>
 <div id="content">
-    <section>
-        <h3>Filters summary</h3>
-        <div class="row">
-            <div class="col-md-3">
-                <div>Where: <strong>All NYC boroughs</strong></div>
-                <div>Metrics: <strong>All metrics</strong></div>
-                <div>When: <strong>1/1/2014</strong> to <strong>6/30/2014</strong></div>
-                <div>Groups: <strong>None selected</strong></div>
-                <div>Garden types: <strong>All types</strong></div>
+    <section class="filters">
+        <div class="filters-container">
+            <h3 class="filters-header">Filters summary</h3>
+            <div class="filters-list">
+                <div class="filters-list-item">
+                    Where: <strong>All NYC boroughs</strong>
+                </div>
+                <div class="filters-list-item">
+                    Metrics: <strong>All metrics</strong>
+                </div>
+                <div class="filters-list-item">
+                    When: <strong>1/1/2014</strong> to <strong>6/30/2014</strong>
+                </div>
+                <div class="filters-list-item">
+                    Groups: <strong>None selected</strong>
+                </div>
+                <div class="filters-list-item">
+                    Garden types: <strong>All types</strong>
+                </div>
             </div>
-            <div class="col-md-3">
+            <div class="filters-actions">
                 <a class="btn btn-default" href="index.html">edit filters</a>
                 <a class="btn btn-default btn-hide" href="#">hide</a>
             </div>
         </div>
     </section>
-    <section>
-        <h3>Data summary</h3>
+
+    <section class="summary">
+        <h3 class="summary-header">Data summary</h3>
         <div class="data-summary"></div>
+        <div class="summary-actions">
+            <a class="btn btn-primary btn-download" href="#">
+                download data
+            </a>
+        </div>
     </section>
 
-    <div class="data-summary-actions">
-        <a class="btn btn-primary btn-download" href="#">
-            download data
-        </a>
-    </div>
 </div>
 
                 </main>

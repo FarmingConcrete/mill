@@ -8,3 +8,46 @@
     stroke: #000;
     shape-rendering: crispEdges;
 }
+
+.view-page {
+    h3 {
+        .text-header();
+    }
+
+    .filters {
+        .make-row(0);
+        margin-bottom: 50px;
+
+        &-actions {
+            padding-top: 10px;
+        }
+
+        &-container {
+            .make-sm-column(5, 0);
+        }
+
+        &-header {
+            border-bottom: @separator-border;
+        }
+
+        &-list {
+            border-bottom: @separator-border;
+            padding-bottom: 10px;
+        }
+
+        &-list-item {
+            margin-bottom: 5px;
+            margin-top: 5px;
+        }
+    }
+
+    .summary {
+        &-header {
+            border-bottom: @separator-border;
+        }
+
+        &-actions {
+            margin-top: 25px;
+        }
+    }
+}

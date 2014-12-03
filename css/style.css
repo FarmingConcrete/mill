@@ -5672,12 +5672,14 @@ button.close {
 .form-horizontal .fields:after,
 .form-horizontal .form-group:before,
 .form-horizontal .form-group:after,
-.overview-list:before,
-.overview-list:after,
-.filters-item-inputs:before,
-.filters-item-inputs:after,
-.filters-dates-row:before,
-.filters-dates-row:after {
+.main-index-page .overview-list:before,
+.main-index-page .overview-list:after,
+.main-index-page .filters-item-inputs:before,
+.main-index-page .filters-item-inputs:after,
+.main-index-page .filters-dates-row:before,
+.main-index-page .filters-dates-row:after,
+.view-page .filters:before,
+.view-page .filters:after {
   content: " ";
   display: table;
 }
@@ -5699,9 +5701,10 @@ button.close {
 .form-actions:after,
 .form-horizontal .fields:after,
 .form-horizontal .form-group:after,
-.overview-list:after,
-.filters-item-inputs:after,
-.filters-dates-row:after {
+.main-index-page .overview-list:after,
+.main-index-page .filters-item-inputs:after,
+.main-index-page .filters-dates-row:after,
+.view-page .filters:after {
   clear: both;
 }
 .center-block {
@@ -5970,6 +5973,12 @@ button.close {
   display: block;
   font-size: 12px;
   font-weight: bold;
+  text-transform: uppercase;
+}
+.text-header {
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 24px;
   text-transform: uppercase;
 }
 body {
@@ -7660,22 +7669,18 @@ table.dataTable thead .sorting_desc_disabled {
   margin-left: 0;
   margin-right: 0;
 }
-.data-summary-actions {
-  margin-top: 15px;
-  text-align: center;
-}
 h2 {
   border-top: 1px solid #404040;
   border-bottom: 1px dotted #8c8c8c;
 }
-.intro-text {
+.main-index-page .intro-text {
   font-size: 14px;
   letter-spacing: .5px;
   line-height: 24px;
   padding: 50px;
   padding-top: 0;
 }
-.overview-list {
+.main-index-page .overview-list {
   margin-left: -15px;
   margin-right: -15px;
   padding-bottom: 40px;
@@ -7683,7 +7688,7 @@ h2 {
   padding-left: 20px;
   padding-right: 20px;
 }
-.overview-list-item {
+.main-index-page .overview-list-item {
   position: relative;
   min-height: 1px;
   padding-left: 15px;
@@ -7691,57 +7696,57 @@ h2 {
   text-align: center;
 }
 @media (min-width: 768px) {
-  .overview-list-item {
+  .main-index-page .overview-list-item {
     float: left;
     width: 25%;
   }
 }
-.overview-list-item-counting {
+.main-index-page .overview-list-item-counting {
   color: #f63c04;
   font-weight: bold;
   margin-top: 60px;
 }
-.overview-list-item-number {
+.main-index-page .overview-list-item-number {
   font-size: 48px;
 }
-.overview-list-item-label {
+.main-index-page .overview-list-item-label {
   display: block;
   font-size: 12px;
   font-weight: bold;
   text-transform: uppercase;
 }
-.filters-item {
+.main-index-page .filters-item {
   margin-bottom: 20px;
   margin-top: 10px;
 }
-.filters-item-inputs {
+.main-index-page .filters-item-inputs {
   margin-left: 0;
   margin-right: 0;
 }
-.filters-item-inputs :first-child {
+.main-index-page .filters-item-inputs :first-child {
   padding-left: 0;
 }
-.filters-item-label {
+.main-index-page .filters-item-label {
   font-size: 14px;
   margin-bottom: 5px;
 }
-.filters-dates-row {
+.main-index-page .filters-dates-row {
   margin-left: -15px;
   margin-right: -15px;
 }
-.filters-dates-row-item {
+.main-index-page .filters-dates-row-item {
   position: relative;
   min-height: 1px;
   padding-left: 15px;
   padding-right: 15px;
 }
 @media (min-width: 768px) {
-  .filters-dates-row-item {
+  .main-index-page .filters-dates-row-item {
     float: left;
     width: 25%;
   }
 }
-.filters-actions {
+.main-index-page .filters-actions {
   border-top: 1px dotted #8c8c8c;
   padding-top: 20px;
 }
@@ -7753,4 +7758,47 @@ h2 {
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
+}
+.view-page h3 {
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 24px;
+  text-transform: uppercase;
+}
+.view-page .filters {
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 50px;
+}
+.view-page .filters-actions {
+  padding-top: 10px;
+}
+.view-page .filters-container {
+  position: relative;
+  min-height: 1px;
+  padding-left: 0;
+  padding-right: 0;
+}
+@media (min-width: 768px) {
+  .view-page .filters-container {
+    float: left;
+    width: 41.66666667%;
+  }
+}
+.view-page .filters-header {
+  border-bottom: 1px dotted #8c8c8c;
+}
+.view-page .filters-list {
+  border-bottom: 1px dotted #8c8c8c;
+  padding-bottom: 10px;
+}
+.view-page .filters-list-item {
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+.view-page .summary-header {
+  border-bottom: 1px dotted #8c8c8c;
+}
+.view-page .summary-actions {
+  margin-top: 25px;
 }
