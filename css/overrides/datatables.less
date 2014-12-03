@@ -15,3 +15,36 @@ table.dataTable thead {
         background-image: data-uri("../bower_components/datatables/media/images/sort_desc_disabled.png");
     }
 }
+
+.dataTables_wrapper {
+    .dataTables_paginate {
+        float: left;
+        font-weight: bold;
+
+        .paginate_button {
+            text-transform: uppercase;
+
+            &,
+            &.current,
+            &.current:focus,
+            &.current:visited,
+            &.current:hover,
+            &.current:active,
+            &:focus,
+            &:visited,
+            &:hover,
+            &:active {
+                background: none;
+                border: none;
+            }
+
+            &, &:hover {
+                color: @metric-color !important;
+            }
+
+            &.previous, &.next {
+                color: @garden-color !important;
+            }
+        }
+    }
+}
