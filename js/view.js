@@ -172,9 +172,15 @@ function setFilters(query) {
     $('.filters-list').append(filtersTemplate(qs.parse(query)));
 }
 
+function setEditFiltersLink(query) {
+    var url = $('.btn-edit-filters').attr('href') + query;
+    $('.btn-edit-filters').attr('href', url);
+}
+
 module.exports = {
     init: function () {
         setFilters(window.location.search.slice(1));
+        setEditFiltersLink(window.location.search);
 
         var data = createFakeDataset();
 

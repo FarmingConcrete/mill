@@ -3492,6 +3492,7 @@ Handlebars.registerHelper('filterTypes', function (types) {
 },{"../bower_components/handlebars/handlebars.runtime":"/home/eric/Documents/code/fc-mill/bower_components/handlebars/handlebars.runtime.js","../bower_components/underscore/underscore-min":"/home/eric/Documents/code/fc-mill/bower_components/underscore/underscore-min.js"}],"/home/eric/Documents/code/fc-mill/js/index.js":[function(require,module,exports){
 (function (global){
 var $ = (typeof window !== "undefined" ? window.$ : typeof global !== "undefined" ? global.$ : null);
+var qs = require('qs');
 require('../bower_components/pickadate/lib/picker');
 require('../bower_components/pickadate/lib/picker.date');
 require('../bower_components/select2/select2.min');
@@ -3512,6 +3513,28 @@ function getViewQueryString() {
     return $.param(getViewFilters()).replace(/(?:%5B|%5D)/g, '');
 }
 
+function setFilters(query) {
+    var parsed = qs.parse(query);
+
+    // Metrics
+    $(':input[name=metric]').select2('val', parsed.metric);
+
+    // Where
+    $(':input[name=state]').select2('val', parsed.state).trigger('change');
+    $(':input[name=city]').select2('val', parsed.city);
+    $(':input[name=zip]').select2('val', parsed.zip);
+
+    // When
+    $(':input[name=start]').val(parsed.start);
+    $(':input[name=end]').val(parsed.end);
+
+    // Group
+    $(':input[name=group]').select2('val', parsed.group);
+
+    // Garden type
+    $(':input[name=garden_type]').select2('val', parsed.garden_type);
+}
+
 function initIndexPage() {
     $(':input[type=date]').pickadate({
         format: 'm/d/yy'
@@ -3527,6 +3550,8 @@ function initIndexPage() {
         var url = $(this).attr('href') + '?' + getViewQueryString();
         $('.btn-submit').attr('href', url);
     });
+
+    setFilters(window.location.search.slice(1));
 }
 
 $(document).ready(function () {
@@ -3539,7 +3564,7 @@ $(document).ready(function () {
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../bower_components/pickadate/lib/picker":"/home/eric/Documents/code/fc-mill/bower_components/pickadate/lib/picker.js","../bower_components/pickadate/lib/picker.date":"/home/eric/Documents/code/fc-mill/bower_components/pickadate/lib/picker.date.js","../bower_components/select2/select2.min":"/home/eric/Documents/code/fc-mill/bower_components/select2/select2.min.js","./view":"/home/eric/Documents/code/fc-mill/js/view.js"}],"/home/eric/Documents/code/fc-mill/js/view.js":[function(require,module,exports){
+},{"../bower_components/pickadate/lib/picker":"/home/eric/Documents/code/fc-mill/bower_components/pickadate/lib/picker.js","../bower_components/pickadate/lib/picker.date":"/home/eric/Documents/code/fc-mill/bower_components/pickadate/lib/picker.date.js","../bower_components/select2/select2.min":"/home/eric/Documents/code/fc-mill/bower_components/select2/select2.min.js","./view":"/home/eric/Documents/code/fc-mill/js/view.js","qs":"/home/eric/Documents/code/fc-mill/node_modules/qs/index.js"}],"/home/eric/Documents/code/fc-mill/js/view.js":[function(require,module,exports){
 var _ = require('../bower_components/underscore/underscore-min'),
     moment = require('../bower_components/moment/min/moment.min'),
     Handlebars = require('../bower_components/handlebars/handlebars.runtime'),
@@ -3714,9 +3739,15 @@ function setFilters(query) {
     $('.filters-list').append(filtersTemplate(qs.parse(query)));
 }
 
+function setEditFiltersLink(query) {
+    var url = $('.btn-edit-filters').attr('href') + query;
+    $('.btn-edit-filters').attr('href', url);
+}
+
 module.exports = {
     init: function () {
         setFilters(window.location.search.slice(1));
+        setEditFiltersLink(window.location.search);
 
         var data = createFakeDataset();
 
