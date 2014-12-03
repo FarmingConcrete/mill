@@ -7835,6 +7835,9 @@ h2 {
 .view-page .filters-list-item-value {
   font-weight: bold;
 }
+.view-page .summary {
+  height: 400px;
+}
 .view-page .summary-header {
   border-bottom: 1px dotted #8c8c8c;
 }

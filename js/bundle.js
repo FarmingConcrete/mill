@@ -2974,7 +2974,7 @@ function makeTable($table, data) {
     });
 }
 
-function makeChart($chart, data, availableWidth) {
+function makeChart($chart, data, availableWidth, availableHeight) {
     data = data.slice(0, 10);
 
     // Set our margins
@@ -2985,7 +2985,7 @@ function makeChart($chart, data, availableWidth) {
         left: 60
     },
     width = availableWidth - margin.left - margin.right,
-    height = 250 - margin.top - margin.bottom;
+    height = availableHeight - margin.top - margin.bottom;
 
     // Our X scale
     var x = d3.scale.ordinal().rangeRoundBands([0, width], 0.1);
@@ -3106,12 +3106,18 @@ function makeTabs($location, data) {
     $location.find('.nav-tabs a:first').tab('show');
 }
 
+function findAvailableDataSummaryHeight() {
+    return $('.summary').height() - $('.summary-header').outerHeight() - 
+        $('.summary-actions').outerHeight() - $('.nav-tabs').outerHeight();
+}
+
 function populateTabs(results) {
-    var chartWidth = $('.chart:eq(0)').width();
+    var chartWidth = $('.chart:eq(0)').width(),
+        chartHeight = findAvailableDataSummaryHeight();
     _.each(results.metrics, function (metric) {
         var $tab = $('#' + slugifyMetricName(metric.name));
         makeTable($tab.find('.metric-table'), metric);
-        makeChart($tab.find('.chart'), asObjects(metric.records), chartWidth);
+        makeChart($tab.find('.chart'), asObjects(metric.records), chartWidth, chartHeight);
     });
 }
 
