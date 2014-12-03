@@ -1,4 +1,4 @@
-var _ = require('../bower_components/underscore/underscore-min');
+var _ = require('underscore');
 var Handlebars = require('../bower_components/handlebars/handlebars.runtime');
 
 Handlebars.registerHelper('filterWhere', function (city, state, zip) {

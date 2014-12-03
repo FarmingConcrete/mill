@@ -40,6 +40,7 @@
     "jquery": "global:$"
   },
   "dependencies": {
-    "qs": "^2.3.3"
+    "qs": "^2.3.3",
+    "underscore": "^1.7.0"
   }
 }

@@ -1,4 +1,4 @@
-var _ = require('../bower_components/underscore/underscore-min'),
+var _ = require('underscore'),
     moment = require('../bower_components/moment/min/moment.min'),
     Handlebars = require('../bower_components/handlebars/handlebars.runtime'),
     qs = require('qs');
