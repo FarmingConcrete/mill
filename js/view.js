@@ -76,7 +76,7 @@ function makeTable($table, data) {
     });
 }
 
-function makeChart($chart, data) {
+function makeChart($chart, data, availableWidth) {
     data = data.slice(0, 10);
 
     // Set our margins
@@ -86,7 +86,7 @@ function makeChart($chart, data) {
         bottom: 30,
         left: 60
     },
-    width = 500 - margin.left - margin.right,
+    width = availableWidth - margin.left - margin.right,
     height = 250 - margin.top - margin.bottom;
 
     // Our X scale
@@ -209,10 +209,11 @@ function makeTabs($location, data) {
 }
 
 function populateTabs(results) {
+    var chartWidth = $('.chart:eq(0)').width();
     _.each(results.metrics, function (metric) {
         var $tab = $('#' + slugifyMetricName(metric.name));
         makeTable($tab.find('.metric-table'), metric);
-        makeChart($tab.find('.chart'), asObjects(metric.records));
+        makeChart($tab.find('.chart'), asObjects(metric.records), chartWidth);
     });
 }
 
