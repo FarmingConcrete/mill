@@ -7796,6 +7796,9 @@ h2 {
   margin-bottom: 5px;
   margin-top: 5px;
 }
+.view-page .filters-list-item-value {
+  font-weight: bold;
+}
 .view-page .summary-header {
   border-bottom: 1px dotted #8c8c8c;
 }

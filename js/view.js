@@ -1,9 +1,12 @@
 var _ = require('../bower_components/underscore/underscore-min'),
     moment = require('../bower_components/moment/min/moment.min'),
-    Handlebars = require('../bower_components/handlebars/handlebars.runtime');
+    Handlebars = require('../bower_components/handlebars/handlebars.runtime'),
+    qs = require('qs');
 
-var templates = require('../templates/dynamic/compiled')(Handlebars),
-    tabsTemplate = templates['view-tabs.hbs'];
+var templates = require('../templates/dynamic/compiled')(Handlebars);
+require('./handlebars.helpers');
+var filtersTemplate = templates['view-filters.hbs'];
+var tabsTemplate = templates['view-tabs.hbs'];
 
 require('../bower_components/bootstrap/js/tab');
 require('../bower_components/datatables/media/js/jquery.dataTables.min');
@@ -165,8 +168,14 @@ function loadData() {
     return $.getJSON(url);
 }
 
+function setFilters(query) {
+    $('.filters-list').append(filtersTemplate(qs.parse(query)));
+}
+
 module.exports = {
     init: function () {
+        setFilters(window.location.search.slice(1));
+
         var data = createFakeDataset();
 
         // Create tabs for each metric

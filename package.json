@@ -38,5 +38,8 @@
   "browserify-shim": {
     "d3": "global:d3",
     "jquery": "global:$"
+  },
+  "dependencies": {
+    "qs": "^2.3.3"
   }
 }
