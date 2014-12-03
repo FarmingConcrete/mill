@@ -1,6 +1,6 @@
 var _ = require('underscore'),
     moment = require('../bower_components/moment/min/moment.min'),
-    Handlebars = require('../bower_components/handlebars/handlebars.runtime'),
+    Handlebars = require('handlebars'),
     qs = require('qs');
 
 var templates = require('../templates/dynamic/compiled')(Handlebars);

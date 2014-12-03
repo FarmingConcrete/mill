@@ -1,5 +1,5 @@
 var _ = require('underscore');
-var Handlebars = require('../bower_components/handlebars/handlebars.runtime');
+var Handlebars = require('handlebars');
 
 Handlebars.registerHelper('filterWhere', function (city, state, zip) {
     return _.compact([city, state, zip]).join(', ') || 'Everywhere';
