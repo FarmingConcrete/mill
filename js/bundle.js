@@ -2959,6 +2959,21 @@ function asObjects(data) {
     });
 }
 
+function makeTable($table, data) {
+    var columns = [
+        { "title": "Recorded" },
+        { "title": "Pounds" },
+        { "title": "Crop" }
+    ];
+    $table.dataTable({
+        columns: columns,
+        data: data.records,
+        lengthChange: false,
+        pageLength: 5,
+        searching: false
+    });
+}
+
 function makeChart($chart, data) {
     data = data.slice(0, 10);
 
@@ -3075,6 +3090,30 @@ function setEditFiltersLink(query) {
     $('.btn-edit-filters').attr('href', url);
 }
 
+function slugifyMetricName(name) {
+    return name.replace(/ /g, '-').toLowerCase();
+}
+
+function makeTabs($location, data) {
+    // Create tabs for each metric
+    var slugMetrics = _.map(data.results.metrics, function (metric) {
+        return {
+            slug: slugifyMetricName(metric.name),
+            name: metric.name
+        };
+    });
+    $location.append(tabsTemplate({ metrics: slugMetrics }));
+    $location.find('.nav-tabs a:first').tab('show');
+}
+
+function populateTabs(results) {
+    _.each(results.metrics, function (metric) {
+        var $tab = $('#' + slugifyMetricName(metric.name));
+        makeTable($tab.find('.metric-table'), metric);
+        makeChart($tab.find('.chart'), asObjects(metric.records));
+    });
+}
+
 module.exports = {
     init: function () {
         setFilters(window.location.search.slice(1));
@@ -3082,37 +3121,10 @@ module.exports = {
 
         var data = createFakeDataset();
 
-        // Create tabs for each metric
-        var slugMetrics = _.map(data.results.metrics, function (metric) {
-            return {
-                slug: metric.name.replace(/ /g, '-').toLowerCase(),
-                name: metric.name
-            };
-        });
-        $('.data-summary').append(tabsTemplate({ metrics: slugMetrics }));
-        $('.data-summary .nav-tabs a:first').tab('show');
+        makeTabs($('.data-summary'), data);
+        populateTabs(data.results);
 
-        // Populate tabs
-        _.each(data.results.metrics, function (m) {
-            var $tab = $('#' + m.name.replace(/ /g, '-').toLowerCase());
-
-            var columns = [
-                { "title": "Recorded" },
-                { "title": "Pounds" },
-                { "title": "Crop" }
-            ];
-            $tab.find('.metric-table').dataTable({
-                columns: columns,
-                data: m.records,
-                lengthChange: false,
-                pageLength: 5,
-                searching: false
-            });
-
-            var $chart = $tab.find('.chart');
-            makeChart($chart, asObjects(m.records));
-        });
-
+        // Handle events
         $('.btn-download').click(function () {
             alert('Not implemented yet! Will be an Excel file with all the data.');
         });
