@@ -84,7 +84,7 @@ function makeChart($chart, data, availableWidth, availableHeight) {
         top: 20,
         right: 20,
         bottom: 30,
-        left: 60
+        left: 30
     },
     width = availableWidth - margin.left - margin.right,
     height = availableHeight - margin.top - margin.bottom;
