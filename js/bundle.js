@@ -2910,45 +2910,6 @@ require('../bower_components/bootstrap/js/tab');
 require('../bower_components/datatables/media/js/jquery.dataTables.min');
 
 
-function createFakeDataset() {
-    function fakeRecords() {
-        var dataSet = [],
-            currentDate = moment('2014-01-01'),
-            crops = ['corn', 'peppers (hot)', 'tomatoes'];
-        _.each(_.range(_.random(75)), function () {
-            currentDate = currentDate.add(_.random(3), 'days');
-            dataSet.push([
-                currentDate.format('M/D/YY'),
-                _.random(5),
-                _.sample(crops)
-            ]);
-        });
-        return dataSet;
-    }
-
-    return {
-        results: {
-            gardens: {
-                count: 5
-            },
-            metrics: [
-                {
-                    name: 'Crop Count',
-                    records: fakeRecords()
-                },
-                {
-                    name: 'Harvest Count',
-                    records: fakeRecords()
-                },
-                {
-                    name: 'Compost by Weight',
-                    records: fakeRecords()
-                }
-            ]   
-        }
-    };
-}
-
 function makeTable($table, data) {
     // Infer columns
     var columns = _.chain(_.keys(data.records[0]))
