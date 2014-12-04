@@ -2949,22 +2949,21 @@ function createFakeDataset() {
     };
 }
 
-function asObjects(data) {
-    return _.map(data, function (d) {
-        return {
-            date: d[0],
-            total: d[1],
-            crop: d[2]
-        };
-    });
-}
-
 function makeTable($table, data) {
-    var columns = [
-        { "title": "Recorded" },
-        { "title": "Pounds" },
-        { "title": "Crop" }
-    ];
+    // Infer columns
+    var columns = _.chain(_.keys(data.records[0]))
+        .map(function (column) {
+            return {
+                data: column,
+                title: column.replace(/_/g, ' ')
+            };
+        })
+        .sortBy(function (column) {
+            return column.title;
+        })
+        .value();
+
+    // Create table
     $table.dataTable({
         columns: columns,
         data: data.records,
@@ -2974,8 +2973,13 @@ function makeTable($table, data) {
     });
 }
 
-function makeChart($chart, data, availableWidth, availableHeight) {
-    data = data.slice(0, 10);
+function makeChart($chart, data, availableWidth, availableHeight, numericFieldName) {
+    // Infer 'total' field, for y axis
+    if (!numericFieldName) {
+        numericFieldName = _.filter(_.keys(data[0]), function (k) {
+            return _.isNumber(data[0][k]);
+        })[0];
+    }
 
     // Set our margins
     var margin = {
@@ -2987,15 +2991,9 @@ function makeChart($chart, data, availableWidth, availableHeight) {
     width = availableWidth - margin.left - margin.right,
     height = availableHeight - margin.top - margin.bottom;
 
-    // Our X scale
     var x = d3.scale.ordinal().rangeRoundBands([0, width], 0.1);
-
-    // Our Y scale
     var y = d3.scale.linear().rangeRound([height, 0]);
-
-    // Our color bands
-    var color = d3.scale.ordinal()
-        .range(["#308fef", "#5fa9f3", "#1176db"]);
+    var color = d3.scale.ordinal().range(["#308fef", "#5fa9f3", "#1176db"]);
 
     // Use our X scale to set a bottom axis
     var xAxis = d3.svg.axis()
@@ -3014,9 +3012,7 @@ function makeChart($chart, data, availableWidth, availableHeight) {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    color.domain(d3.keys(data[0]).filter(function (key) {
-        return key !== "year";
-    }));
+    color.domain(d3.keys(data[0]));
 
     data.forEach(function (d) {
         var y0 = 0;
@@ -3024,20 +3020,20 @@ function makeChart($chart, data, availableWidth, availableHeight) {
             return {
                 name: name,
                 y0: y0,
-                y1: y0 += +d.total
+                y1: y0 += +d[numericFieldName]
             };
         });
-        d.total = d.types[d.types.length - 1].y1;
+        d[numericFieldName] = d.types[d.types.length - 1].y1;
     });
 
     // Our X domain is our set of dates
     x.domain(data.map(function (d) {
-        return d.date;
+        return d.recorded;
     }));
 
     // Our Y domain is from zero to our highest total
     y.domain([0, d3.max(data, function (d) {
-        return d.total;
+        return d[numericFieldName];
     })]);
 
     svg.append("g")
@@ -3054,7 +3050,7 @@ function makeChart($chart, data, availableWidth, availableHeight) {
         .enter().append("g")
         .attr("class", "g")
         .attr("transform", function (d) {
-            return "translate(" + x(d.date) + ",0)";
+            return "translate(" + x(d.recorded) + ",0)";
         });
 
     date.selectAll("rect")
@@ -3117,7 +3113,7 @@ function populateTabs(results) {
     _.each(results.metrics, function (metric) {
         var $tab = $('#' + slugifyMetricName(metric.name));
         makeTable($tab.find('.metric-table'), metric);
-        makeChart($tab.find('.chart'), asObjects(metric.records), chartWidth, chartHeight);
+        makeChart($tab.find('.chart'), metric.records, chartWidth, chartHeight);
     });
 }
 
@@ -3125,11 +3121,11 @@ module.exports = {
     init: function () {
         setFilters(window.location.search.slice(1));
         setEditFiltersLink(window.location.search);
-
-        var data = createFakeDataset();
-
-        makeTabs($('.data-summary'), data);
-        populateTabs(data.results);
+        
+        loadData().done(function (data) {
+            makeTabs($('.data-summary'), data);
+            populateTabs(data.results);
+        });
 
         // Handle events
         $('.btn-download').click(function () {
