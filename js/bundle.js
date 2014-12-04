@@ -2925,6 +2925,7 @@ function makeTable($table, data) {
         .value();
 
     // Create table
+    // TODO detect numeric columns for alignment
     $table.dataTable({
         columns: columns,
         data: data.records,
@@ -2952,13 +2953,26 @@ function makeChart($chart, data, availableWidth, availableHeight, numericFieldNa
     width = availableWidth - margin.left - margin.right,
     height = availableHeight - margin.top - margin.bottom;
 
-    var x = d3.scale.ordinal().rangeRoundBands([0, width], 0.1);
+    var dateFormat = d3.time.format("%Y-%m-%d");
+
+    var x = d3.time.scale()
+        .domain(d3.extent(data, function (d) {
+            return dateFormat.parse(d.recorded).getTime(); 
+        }))
+        .rangeRound([0, width - margin.left - margin.right]);
     var y = d3.scale.linear().rangeRound([height, 0]);
-    var color = d3.scale.ordinal().range(["#308fef", "#5fa9f3", "#1176db"]);
+
+    var histogram = d3.layout.histogram()
+        .bins(x.ticks(10))
+        .value(function (d) {
+            return dateFormat.parse(d.recorded).getTime(); 
+        })
+        (data); 
 
     // Use our X scale to set a bottom axis
     var xAxis = d3.svg.axis()
         .scale(x)
+        .ticks(d3.time.year)
         .orient("bottom");
 
     // Same for our left axis
@@ -2973,29 +2987,20 @@ function makeChart($chart, data, availableWidth, availableHeight, numericFieldNa
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    color.domain(d3.keys(data[0]));
-
-    data.forEach(function (d) {
+    var histogramData = [];
+    histogram.forEach(function (d) {
         var y0 = 0;
-        d.types = color.domain().map(function (name) {
-            return {
-                name: name,
-                y0: y0,
-                y1: y0 += +d[numericFieldName]
-            };
+        histogramData.push({
+            name: name,
+            date: d3.min(d, function (d) {
+                return dateFormat.parse(d.recorded).getTime(); 
+            }),
+            y0: y0,
+            y1: y0 += d3.sum(d, function (d) { return +d[numericFieldName]; })
         });
-        d[numericFieldName] = d.types[d.types.length - 1].y1;
     });
 
-    // Our X domain is our set of dates
-    x.domain(data.map(function (d) {
-        return d.recorded;
-    }));
-
-    // Our Y domain is from zero to our highest total
-    y.domain([0, d3.max(data, function (d) {
-        return d[numericFieldName];
-    })]);
+    y.domain([0, d3.max(histogramData, function (d) { return d.y1; })]);
 
     svg.append("g")
         .attr("class", "x axis")
@@ -3007,19 +3012,16 @@ function makeChart($chart, data, availableWidth, availableHeight, numericFieldNa
         .call(yAxis);
 
     var date = svg.selectAll(".date")
-        .data(data)
+        .data(histogramData)
         .enter().append("g")
         .attr("class", "g")
         .attr("transform", function (d) {
-            return "translate(" + x(d.recorded) + ",0)";
-        });
-
-    date.selectAll("rect")
-        .data(function (d) {
-            return d.types;
+            if (d.date) {
+                return "translate(" + x(d.date) + ",0)";
+            }
         })
-        .enter().append("rect")
-            .attr("width", x.rangeBand())
+        .append("rect")
+            .attr("width", 5)
             .attr("y", function (d) {
                 return y(d.y1);
             })
