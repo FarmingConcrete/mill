@@ -1,4 +1,5 @@
 var _ = require('underscore'),
+    slugify = require('slugify'),
     moment = require('../bower_components/moment/min/moment.min'),
     Handlebars = require('handlebars'),
     qs = require('qs');
@@ -152,7 +153,7 @@ function setEditFiltersLink(query) {
 }
 
 function slugifyMetricName(name) {
-    return name.replace(/ /g, '-').toLowerCase();
+    return slugify(name.toLowerCase()).replace(/[^a-z0-9-]/g, '-');
 }
 
 function makeTabs($location, data) {
