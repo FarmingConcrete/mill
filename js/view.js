@@ -32,7 +32,6 @@ function makeTable($table, data) {
         .value();
 
     // Create table
-    // TODO detect numeric columns for alignment
     $table.dataTable({
         columns: columns,
         data: data.records,
