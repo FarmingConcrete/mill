@@ -1,5 +1,4 @@
 var _ = require('underscore'),
-    config = require('./config'),
     slugify = require('slugify'),
     moment = require('../bower_components/moment/min/moment.min'),
     Handlebars = require('handlebars'),
@@ -13,7 +12,7 @@ var tabsTemplate = templates['view-tabs.hbs'];
 require('../bower_components/bootstrap/js/tab');
 require('../bower_components/datatables/media/js/jquery.dataTables.min');
 
-var barnUrl = config.barnUrl,
+var barnUrl = CONFIG.barnUrl,
     previewEndpoint = '/api/records/',
     downloadEndpoint = '/api/export/';
 
