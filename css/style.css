@@ -7725,6 +7725,7 @@ h2 {
 .main-index-page .overview-list {
   margin-left: -15px;
   margin-right: -15px;
+  display: none;
   padding-bottom: 40px;
   padding-top: 40px;
   padding-left: 20px;

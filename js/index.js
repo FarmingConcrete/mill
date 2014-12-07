@@ -6,6 +6,9 @@ require('../bower_components/select2/select2.min');
 
 var initViewPage = require('./view').init;
 
+var barnUrl = CONFIG.barnUrl,
+    overviewEndpoint = '/api/overview/';
+
 function getViewFilters() {
     var filters = {};
     $('.filters-form :input[name]').each(function () {
@@ -42,7 +45,18 @@ function setFilters(query) {
     $(':input[name=garden_type]').select2('val', parsed.garden_type);
 }
 
+function loadOverview() {
+    $.getJSON(barnUrl + overviewEndpoint, function (data) {
+        $('.overview-gardens').text(data.gardens);
+        $('.overview-harvest-pounds').text(data.pounds_of_food);
+        $('.overview-compost-pounds').text(data.pounds_of_compost);
+        $('.overview-list').slideDown();
+    });
+}
+
 function initIndexPage() {
+    loadOverview();
+
     $(':input[type=date]').pickadate({
         format: 'm/d/yy'
     });
