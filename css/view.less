@@ -57,4 +57,22 @@
             margin-top: 25px;
         }
     }
+
+    .metric-tab {
+        &-row {
+            .make-row(0);
+        }
+
+        &-table {
+            .make-md-column(6);
+
+            .dataTables_wrapper {
+                overflow: auto;
+            }
+        }
+
+        &-chart {
+            .make-md-column(6);
+        }
+    }
 }

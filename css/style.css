@@ -5679,7 +5679,9 @@ button.close {
 .main-index-page .filters-dates-row:before,
 .main-index-page .filters-dates-row:after,
 .view-page .filters:before,
-.view-page .filters:after {
+.view-page .filters:after,
+.view-page .metric-tab-row:before,
+.view-page .metric-tab-row:after {
   content: " ";
   display: table;
 }
@@ -5704,7 +5706,8 @@ button.close {
 .main-index-page .overview-list:after,
 .main-index-page .filters-item-inputs:after,
 .main-index-page .filters-dates-row:after,
-.view-page .filters:after {
+.view-page .filters:after,
+.view-page .metric-tab-row:after {
   clear: both;
 }
 .center-block {
@@ -7847,4 +7850,35 @@ h2 {
 }
 .view-page .summary-actions {
   margin-top: 25px;
+}
+.view-page .metric-tab-row {
+  margin-left: 0;
+  margin-right: 0;
+}
+.view-page .metric-tab-table {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 992px) {
+  .view-page .metric-tab-table {
+    float: left;
+    width: 50%;
+  }
+}
+.view-page .metric-tab-table .dataTables_wrapper {
+  overflow: auto;
+}
+.view-page .metric-tab-chart {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 992px) {
+  .view-page .metric-tab-chart {
+    float: left;
+    width: 50%;
+  }
 }
