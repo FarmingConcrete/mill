@@ -1,4 +1,5 @@
 var _ = require('underscore'),
+    config = require('./config'),
     slugify = require('slugify'),
     moment = require('../bower_components/moment/min/moment.min'),
     Handlebars = require('handlebars'),
@@ -11,6 +12,10 @@ var tabsTemplate = templates['view-tabs.hbs'];
 
 require('../bower_components/bootstrap/js/tab');
 require('../bower_components/datatables/media/js/jquery.dataTables.min');
+
+var barnUrl = config.barnUrl,
+    previewEndpoint = '/api/records/',
+    downloadEndpoint = '/api/export/';
 
 
 function makeTable($table, data) {
@@ -137,10 +142,7 @@ function makeChart($chart, data, availableWidth, availableHeight, numericFieldNa
 }
 
 function loadData() {
-    var barnBase = 'http://localhost:8000',
-        endpoint = '/api/records/',
-        url = barnBase + endpoint + window.location.search;
-    return $.getJSON(url);
+    return $.getJSON(barnUrl + previewEndpoint + window.location.search);
 }
 
 function setFilters(query) {
@@ -193,11 +195,9 @@ module.exports = {
             populateTabs(data.results);
         });
 
-        // Handle events
-        $('.btn-download').click(function () {
-            alert('Not implemented yet! Will be an Excel file with all the data.');
-        });
+        $('.btn-download').attr('href', barnUrl + downloadEndpoint + window.location.search);
 
+        // Handle events
         $('.btn-hide').click(function () {
             $('.filters-container').addClass('hidden');
             $('.btn-show').removeClass('hidden');
