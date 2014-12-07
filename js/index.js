@@ -64,6 +64,16 @@ function loadAvailableFilters() {
         _.each(_.keys(states), function (state) {
             $(':input[name=state]').append($('<option></option>').text(state));
         });
+
+        // Handle groups
+        _.each(data.groups, function (group) {
+            $(':input[name=group]').append($('<option></option>').text(group));
+        });
+
+        // Handle garden types
+        _.each(data.garden_types, function (group) {
+            $(':input[name=garden_type]').append($('<option></option>').text(group));
+        });
     });
 }
 
