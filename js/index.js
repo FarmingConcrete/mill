@@ -74,6 +74,15 @@ function loadAvailableFilters() {
         _.each(data.garden_types, function (group) {
             $(':input[name=garden_type]').append($('<option></option>').text(group));
         });
+
+        // Handle metrics
+        _.each(_.keys(data.metrics), function (metricGroup) {
+            var $group = $('<optgroup></optgroup>').attr('label', metricGroup);
+            _.each(data.metrics[metricGroup], function (metric) {
+                $group.append($('<option></option>').text(metric));
+            });
+            $(':input[name=metric]').append($group);
+        });
     });
 }
 
