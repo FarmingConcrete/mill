@@ -2823,6 +2823,7 @@ Handlebars.registerHelper('filterTypes', function (types) {
 },{"handlebars":"/home/eric/Documents/code/fc-mill/node_modules/handlebars/lib/index.js","underscore":"/home/eric/Documents/code/fc-mill/node_modules/underscore/underscore.js"}],"/home/eric/Documents/code/fc-mill/js/index.js":[function(require,module,exports){
 (function (global){
 var $ = (typeof window !== "undefined" ? window.$ : typeof global !== "undefined" ? global.$ : null);
+var _ = require('underscore');
 var qs = require('qs');
 require('../bower_components/pickadate/lib/picker');
 require('../bower_components/pickadate/lib/picker.date');
@@ -2831,7 +2832,18 @@ require('../bower_components/select2/select2.min');
 var initViewPage = require('./view').init;
 
 var barnUrl = CONFIG.barnUrl,
+    availableFiltersEndpoint = '/api/filters/available/',
     overviewEndpoint = '/api/overview/';
+
+var boroughs = [
+    'Bronx',
+    'Brooklyn',
+    'Manhattan',
+    'Queens',
+    'Staten Island'
+];
+
+var states;
 
 function getViewFilters() {
     var filters = {};
@@ -2869,6 +2881,16 @@ function setFilters(query) {
     $(':input[name=garden_type]').select2('val', parsed.garden_type);
 }
 
+function loadAvailableFilters() {
+    return $.getJSON(barnUrl + availableFiltersEndpoint, function (data) {
+        // Handle states
+        states = data.states;
+        _.each(_.keys(states), function (state) {
+            $(':input[name=state]').append($('<option></option>').text(state));
+        });
+    });
+}
+
 function loadOverview() {
     $.getJSON(barnUrl + overviewEndpoint, function (data) {
         $('.overview-gardens').text(data.gardens);
@@ -2879,24 +2901,65 @@ function loadOverview() {
 }
 
 function initIndexPage() {
+    loadAvailableFilters()
+        .done(function () {
+            var $city = $(':input[name=city]'),
+                $zip = $(':input[name=zip]');
+
+            $(':input[type=date]').pickadate({
+                format: 'm/d/yy'
+            });
+
+            $('select').select2();
+
+            $(':input[name=state]').change(function () {
+                $city.select2('val', null)
+                    .find('option:gt(0)').remove();
+                $zip.select2('val', null)
+                    .find('option:gt(0)').remove();
+
+                var state = $(this).val();
+
+                if (state !== '') {
+                    // Update cities when state changes
+                    if (state === 'NY') {
+                        // Add NYC group w/ boroughs
+                        var $boroughs = $('<optgroup></optgroup>').attr('label', 'New York City');
+                        $boroughs.append($('<option></option>').text('All boroughs'));
+                        _.each(boroughs, function (borough) {
+                            $boroughs.append($('<option></option>').text(borough));
+                        });
+                        $city.append($boroughs);
+                    }
+
+                    var cities = states[state].cities;
+                    if (state === 'NY') {
+                        // Don't add boroughs again here
+                        cities = _.difference(cities, boroughs);
+                    }
+                    _.each(cities, function (city) {
+                        $city.append($('<option></option>').text(city));
+                    });
+
+                    // Update zips when state changes
+                    _.each(states[state].zips, function (zip) {
+                        $zip.append($('<option></option>').text(zip));
+                    });
+                }
+
+                $city.prop('disabled', $(this).val() === '');
+                $zip.prop('disabled', $(this).val() === '');
+            });
+
+            setFilters(window.location.search.slice(1));
+        });
+
     loadOverview();
-
-    $(':input[type=date]').pickadate({
-        format: 'm/d/yy'
-    });
-
-    $('select').select2();
-
-    $(':input[name=state]').change(function () {
-        $(':input[name=city],:input[name=zip]').prop('disabled', $(this).val() === '');
-    });
 
     $('.btn-submit').click(function () {
         var url = $(this).attr('href') + '?' + getViewQueryString();
         $('.btn-submit').attr('href', url);
     });
-
-    setFilters(window.location.search.slice(1));
 }
 
 $(document).ready(function () {
@@ -2909,7 +2972,7 @@ $(document).ready(function () {
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../bower_components/pickadate/lib/picker":"/home/eric/Documents/code/fc-mill/bower_components/pickadate/lib/picker.js","../bower_components/pickadate/lib/picker.date":"/home/eric/Documents/code/fc-mill/bower_components/pickadate/lib/picker.date.js","../bower_components/select2/select2.min":"/home/eric/Documents/code/fc-mill/bower_components/select2/select2.min.js","./view":"/home/eric/Documents/code/fc-mill/js/view.js","qs":"/home/eric/Documents/code/fc-mill/node_modules/qs/index.js"}],"/home/eric/Documents/code/fc-mill/js/view.js":[function(require,module,exports){
+},{"../bower_components/pickadate/lib/picker":"/home/eric/Documents/code/fc-mill/bower_components/pickadate/lib/picker.js","../bower_components/pickadate/lib/picker.date":"/home/eric/Documents/code/fc-mill/bower_components/pickadate/lib/picker.date.js","../bower_components/select2/select2.min":"/home/eric/Documents/code/fc-mill/bower_components/select2/select2.min.js","./view":"/home/eric/Documents/code/fc-mill/js/view.js","qs":"/home/eric/Documents/code/fc-mill/node_modules/qs/index.js","underscore":"/home/eric/Documents/code/fc-mill/node_modules/underscore/underscore.js"}],"/home/eric/Documents/code/fc-mill/js/view.js":[function(require,module,exports){
 var _ = require('underscore'),
     slugify = require('slugify'),
     moment = require('../bower_components/moment/min/moment.min'),
