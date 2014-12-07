@@ -7762,7 +7762,7 @@ h2 {
   margin-left: 0;
   margin-right: 0;
 }
-.main-index-page .filters-item-inputs :first-child {
+.main-index-page .filters-item-inputs > :first-child {
   padding-left: 0;
 }
 .main-index-page .filters-item-label {
