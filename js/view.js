@@ -65,6 +65,7 @@ function makeChart($chart, data, availableWidth, availableHeight, numericFieldNa
         .domain(d3.extent(data, function (d) {
             return dateFormat.parse(d.recorded).getTime(); 
         }))
+        .nice(d3.time.year)
         .rangeRound([0, width - margin.left - margin.right]);
     var y = d3.scale.linear().rangeRound([height, 0]);
 
