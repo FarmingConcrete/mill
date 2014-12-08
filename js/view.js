@@ -8,7 +8,8 @@ var _ = require('underscore'),
 var templates = require('../templates/dynamic/compiled')(Handlebars);
 require('./handlebars.helpers');
 var filtersTemplate = templates['view-filters.hbs'];
-var tabsTemplate = templates['view-tabs.hbs'];
+var emptyMetricsTemplate = templates['view-empty-metrics.hbs'],
+    tabsTemplate = templates['view-tabs.hbs'];
 
 require('../bower_components/bootstrap/js/tab');
 require('../bower_components/datatables/media/js/jquery.dataTables.min');
@@ -175,9 +176,20 @@ function slugifyMetricName(name) {
     return slugify(name.toLowerCase()).replace(/[^a-z0-9-]/g, '-');
 }
 
+function showEmptyMetrics($location, data) {
+    var metricsWithoutRecords = _.filter(data.results.metrics, function (metric) {
+        return metric.records.length === 0;
+    });
+    $location.append(emptyMetricsTemplate({ metrics: metricsWithoutRecords }));
+}
+
 function makeTabs($location, data) {
+    var metricsWithRecords = _.filter(data.results.metrics, function (metric) {
+        return metric.records.length > 0;
+    });
+
     // Create tabs for each metric
-    var slugMetrics = _.map(data.results.metrics, function (metric) {
+    var slugMetrics = _.map(metricsWithRecords, function (metric) {
         return {
             slug: slugifyMetricName(metric.name),
             name: metric.name
@@ -214,6 +226,7 @@ module.exports = {
             spinner.stop();
 
             if (data.results.metrics.length > 0) {
+                showEmptyMetrics($('.data-summary'), data);
                 makeTabs($('.data-summary'), data);
                 populateTabs(data.results);
                 $('.summary-actions').show();

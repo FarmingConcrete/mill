@@ -2,6 +2,20 @@ module.exports = function(Handlebars) {
 
 this["JST"] = this["JST"] || {};
 
+this["JST"][["view-empty-metrics.hbs"]] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
+  var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+  return "        <li>\n            "
+    + escapeExpression(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"name","hash":{},"data":data}) : helper)))
+    + "\n        </li>\n";
+},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+  var stack1, buffer = "<div class=\"alert alert-warning\">\n    <p>No records found for these metrics:</p>\n    <ul>\n";
+  stack1 = helpers.each.call(depth0, (depth0 != null ? depth0.metrics : depth0), {"name":"each","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  return buffer + "    </ul>\n</div>\n";
+},"useData":true});
+
+
+
 this["JST"][["view-filters.hbs"]] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
   return "<div class=\"filters-list-item\">\n    Where:\n    <span class=\"filters-list-item-value\">"
