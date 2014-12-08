@@ -3183,7 +3183,9 @@ function showEmptyMetrics($location, data) {
     var metricsWithoutRecords = _.filter(data.results.metrics, function (metric) {
         return metric.records.length === 0;
     });
-    $location.append(emptyMetricsTemplate({ metrics: metricsWithoutRecords }));
+    if (metricsWithoutRecords.length > 0) {
+        $location.append(emptyMetricsTemplate({ metrics: metricsWithoutRecords }));
+    }
 }
 
 function makeTabs($location, data) {
