@@ -7859,11 +7859,15 @@ h2 {
   border-bottom: 1px dotted #8c8c8c;
 }
 .view-page .summary-actions {
+  display: none;
   margin-top: 25px;
 }
 .view-page .summary .data-summary {
   min-height: 150px;
   position: relative;
+}
+.view-page .summary-no-data {
+  display: none;
 }
 .view-page .metric-tab-row {
   margin-left: 0;

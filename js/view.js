@@ -212,8 +212,16 @@ module.exports = {
 
         loadData().done(function (data) {
             spinner.stop();
-            makeTabs($('.data-summary'), data);
-            populateTabs(data.results);
+
+            if (data.results.metrics.length > 0) {
+                makeTabs($('.data-summary'), data);
+                populateTabs(data.results);
+                $('.summary-actions').show();
+            }
+            else {
+                // Nothing found, let user know
+                $('.summary-no-data').show();
+            }
         });
 
         $('.btn-download').attr('href', barnUrl + downloadEndpoint + window.location.search);
