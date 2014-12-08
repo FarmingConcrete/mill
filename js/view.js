@@ -136,7 +136,7 @@ function makeChart($chart, data, availableWidth, availableHeight, numericFieldNa
             }
         })
         .append("rect")
-            .attr("width", (width / histogram.length) * 0.5)
+            .attr("width", (width / histogram.length) * 0.25)
             .attr("y", function (d) {
                 return y(d.y1);
             })
