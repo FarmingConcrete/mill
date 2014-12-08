@@ -54,7 +54,7 @@ function makeChart($chart, data, availableWidth, availableHeight, numericFieldNa
         top: 20,
         right: 20,
         bottom: 30,
-        left: 30
+        left: 50
     },
     width = availableWidth - margin.left - margin.right,
     height = availableHeight - margin.top - margin.bottom;
@@ -138,6 +138,15 @@ function makeChart($chart, data, availableWidth, availableHeight, numericFieldNa
             .style("fill", function (d) {
                 return '#6b812d';
             });
+
+    svg.append("text")
+        .attr("class", "y label")
+        .attr("text-anchor", "middle")
+        .attr("y", -(margin.left - 10))
+        .attr("x", -(height / 2))
+        .attr("dy", ".75em")
+        .attr("transform", "rotate(-90)")
+        .text(numericFieldName.replace(/_/g, ' '));
 }
 
 function loadData() {
