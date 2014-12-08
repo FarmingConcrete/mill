@@ -3026,9 +3026,10 @@ function makeTable($table, data) {
     // Infer columns
     var columns = _.chain(_.keys(data.records[0]))
         .map(function (column) {
+            var title = data.headers[column] ? data.headers[column] : column.replace(/_/g, ' ');
             return {
                 data: column,
-                title: column.replace(/_/g, ' ')
+                title: title
             };
         })
         .sortBy(function (column) {
@@ -3056,7 +3057,7 @@ function findNumericFieldName(data) {
     });
 }
 
-function makeChart($chart, data, availableWidth, availableHeight, numericFieldName) {
+function makeChart($chart, data, headers, availableWidth, availableHeight, numericFieldName) {
     if (!numericFieldName) {
         numericFieldName = findNumericFieldName(data);
     }
@@ -3151,7 +3152,13 @@ function makeChart($chart, data, availableWidth, availableHeight, numericFieldNa
                 return '#6b812d';
             });
 
-    var yLabel = numericFieldName ? numericFieldName.replace(/_/g, ' ') : 'total';
+    var yLabel = numericFieldName ? numericFieldName : 'total';
+    if (_.contains(_.keys(headers), yLabel)) {
+        yLabel = headers[yLabel];
+    }
+    else {
+        yLabel = yLabel.replace(/_/g, ' ');
+    }
     svg.append("text")
         .attr("class", "y label")
         .attr("text-anchor", "middle")
@@ -3216,7 +3223,7 @@ function populateTabs(results) {
     _.each(results.metrics, function (metric) {
         var $tab = $('#' + slugifyMetricName(metric.name));
         makeTable($tab.find('.metric-table'), metric);
-        makeChart($tab.find('.chart'), metric.records, chartWidth, chartHeight);
+        makeChart($tab.find('.chart'), metric.records, metric.headers, chartWidth, chartHeight);
     });
 }
 
