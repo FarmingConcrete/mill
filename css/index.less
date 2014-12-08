@@ -5,35 +5,51 @@
         padding-top: 0;
     }
 
-    .overview-list {
-        .make-row();
-        display: none;
-        padding-bottom: 40px;
-        padding-top: 40px;
-        padding-left: 20px;
-        padding-right: 20px;
+    .overview {
+        h2 {
+            // For spin.js, spinner doesn't center well without this
+            position: relative;
+        }
 
-        &-item {
-            .make-sm-column(3);
-            text-align: center;
+        &-list {
+            .make-row();
+            display: none;
+            padding-bottom: 40px;
+            padding-top: 40px;
+            padding-left: 20px;
+            padding-right: 20px;
 
-            &-counting {
-                color: @garden-color;
-                font-weight: bold;
-                margin-top: 60px;
-            }
+            &-item {
+                .make-sm-column(3);
+                text-align: center;
 
-            &-number {
-                .summary-callout-number();
-            }
+                &-counting {
+                    color: @garden-color;
+                    font-weight: bold;
+                    margin-top: 60px;
+                }
 
-            &-label {
-                .summary-callout-label();
+                &-number {
+                    .summary-callout-number();
+                }
+
+                &-label {
+                    .summary-callout-label();
+                }
             }
         }
     }
 
     .filters {
+        h2 {
+            // For spin.js, spinner doesn't center well without this
+            position: relative;
+        }
+
+        &-form {
+            display: none;
+        }
+
         &-item {
             margin-bottom: 20px;
             margin-top: 10px;

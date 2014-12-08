@@ -1,6 +1,7 @@
 var $ = require('jquery');
 var _ = require('underscore');
 var qs = require('qs');
+var Spinner = require('spin.js');
 require('../bower_components/pickadate/lib/picker');
 require('../bower_components/pickadate/lib/picker.date');
 require('../bower_components/select2/select2.min');
@@ -87,7 +88,7 @@ function loadAvailableFilters() {
 }
 
 function loadOverview() {
-    $.getJSON(barnUrl + overviewEndpoint, function (data) {
+    return $.getJSON(barnUrl + overviewEndpoint, function (data) {
         $('.overview-gardens').text(data.gardens);
         $('.overview-harvest-pounds').text(data.pounds_of_food);
         $('.overview-compost-pounds').text(data.pounds_of_compost);
@@ -96,6 +97,9 @@ function loadOverview() {
 }
 
 function initIndexPage() {
+    var overviewSpinner = new Spinner({}).spin($('.overview h2')[0]),
+        filtersSpinner = new Spinner({}).spin($('.filters h2')[0]);
+
     loadAvailableFilters()
         .done(function () {
             var $city = $(':input[name=city]'),
@@ -147,9 +151,14 @@ function initIndexPage() {
             });
 
             setFilters(window.location.search.slice(1));
+            filtersSpinner.stop();
+            $('.filters-form').slideDown();
         });
 
-    loadOverview();
+    loadOverview()
+        .done(function () {
+            overviewSpinner.stop();
+        });
 
     $('.btn-submit').click(function () {
         var url = $(this).attr('href') + '?' + getViewQueryString();

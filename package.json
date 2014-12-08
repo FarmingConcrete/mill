@@ -43,6 +43,7 @@
     "handlebars": "^2.0.0",
     "qs": "^2.3.3",
     "slugify": "^0.1.0",
+    "spin.js": "^2.0.1",
     "underscore": "^1.7.0"
   }
 }

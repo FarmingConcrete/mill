@@ -7722,6 +7722,9 @@ h2 {
   padding: 50px;
   padding-top: 0;
 }
+.main-index-page .overview h2 {
+  position: relative;
+}
 .main-index-page .overview-list {
   margin-left: -15px;
   margin-right: -15px;
@@ -7757,6 +7760,12 @@ h2 {
   font-size: 12px;
   font-weight: bold;
   text-transform: uppercase;
+}
+.main-index-page .filters h2 {
+  position: relative;
+}
+.main-index-page .filters-form {
+  display: none;
 }
 .main-index-page .filters-item {
   margin-bottom: 20px;
