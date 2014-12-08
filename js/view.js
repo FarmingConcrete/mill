@@ -2,6 +2,7 @@ var _ = require('underscore'),
     slugify = require('slugify'),
     moment = require('../bower_components/moment/min/moment.min'),
     Handlebars = require('handlebars'),
+    Spinner = require('spin.js'),
     qs = require('qs');
 
 var templates = require('../templates/dynamic/compiled')(Handlebars);
@@ -195,10 +196,13 @@ function populateTabs(results) {
 
 module.exports = {
     init: function () {
+        var spinner = new Spinner({}).spin($('.data-summary')[0]);
+
         setFilters(window.location.search.slice(1));
         setEditFiltersLink(window.location.search);
-        
+
         loadData().done(function (data) {
+            spinner.stop();
             makeTabs($('.data-summary'), data);
             populateTabs(data.results);
         });

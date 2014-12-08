@@ -3005,6 +3005,7 @@ var _ = require('underscore'),
     slugify = require('slugify'),
     moment = require('../bower_components/moment/min/moment.min'),
     Handlebars = require('handlebars'),
+    Spinner = require('spin.js'),
     qs = require('qs');
 
 var templates = require('../templates/dynamic/compiled')(Handlebars);
@@ -3198,10 +3199,13 @@ function populateTabs(results) {
 
 module.exports = {
     init: function () {
+        var spinner = new Spinner({}).spin($('.data-summary')[0]);
+
         setFilters(window.location.search.slice(1));
         setEditFiltersLink(window.location.search);
-        
+
         loadData().done(function (data) {
+            spinner.stop();
             makeTabs($('.data-summary'), data);
             populateTabs(data.results);
         });
@@ -3221,7 +3225,7 @@ module.exports = {
     }
 };
 
-},{"../bower_components/bootstrap/js/tab":"/home/eric/Documents/code/fc-mill/bower_components/bootstrap/js/tab.js","../bower_components/datatables/media/js/jquery.dataTables.min":"/home/eric/Documents/code/fc-mill/bower_components/datatables/media/js/jquery.dataTables.min.js","../bower_components/moment/min/moment.min":"/home/eric/Documents/code/fc-mill/bower_components/moment/min/moment.min.js","../templates/dynamic/compiled":"/home/eric/Documents/code/fc-mill/templates/dynamic/compiled.js","./handlebars.helpers":"/home/eric/Documents/code/fc-mill/js/handlebars.helpers.js","handlebars":"/home/eric/Documents/code/fc-mill/node_modules/handlebars/lib/index.js","qs":"/home/eric/Documents/code/fc-mill/node_modules/qs/index.js","slugify":"/home/eric/Documents/code/fc-mill/node_modules/slugify/lib/slugify.js","underscore":"/home/eric/Documents/code/fc-mill/node_modules/underscore/underscore.js"}],"/home/eric/Documents/code/fc-mill/node_modules/grunt-browserify/node_modules/browserify/lib/_empty.js":[function(require,module,exports){
+},{"../bower_components/bootstrap/js/tab":"/home/eric/Documents/code/fc-mill/bower_components/bootstrap/js/tab.js","../bower_components/datatables/media/js/jquery.dataTables.min":"/home/eric/Documents/code/fc-mill/bower_components/datatables/media/js/jquery.dataTables.min.js","../bower_components/moment/min/moment.min":"/home/eric/Documents/code/fc-mill/bower_components/moment/min/moment.min.js","../templates/dynamic/compiled":"/home/eric/Documents/code/fc-mill/templates/dynamic/compiled.js","./handlebars.helpers":"/home/eric/Documents/code/fc-mill/js/handlebars.helpers.js","handlebars":"/home/eric/Documents/code/fc-mill/node_modules/handlebars/lib/index.js","qs":"/home/eric/Documents/code/fc-mill/node_modules/qs/index.js","slugify":"/home/eric/Documents/code/fc-mill/node_modules/slugify/lib/slugify.js","spin.js":"/home/eric/Documents/code/fc-mill/node_modules/spin.js/spin.js","underscore":"/home/eric/Documents/code/fc-mill/node_modules/underscore/underscore.js"}],"/home/eric/Documents/code/fc-mill/node_modules/grunt-browserify/node_modules/browserify/lib/_empty.js":[function(require,module,exports){
 
 },{}],"/home/eric/Documents/code/fc-mill/node_modules/handlebars/dist/cjs/handlebars.js":[function(require,module,exports){
 "use strict";

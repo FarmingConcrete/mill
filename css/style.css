@@ -7861,6 +7861,10 @@ h2 {
 .view-page .summary-actions {
   margin-top: 25px;
 }
+.view-page .summary .data-summary {
+  min-height: 150px;
+  position: relative;
+}
 .view-page .metric-tab-row {
   margin-left: 0;
   margin-right: 0;
