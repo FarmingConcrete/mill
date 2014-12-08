@@ -180,8 +180,9 @@ function makeTabs($location, data) {
 }
 
 function findAvailableDataSummaryHeight() {
-    return $('.summary').height() - $('.summary-header').outerHeight() - 
+    var height = $('.summary').height() - $('.summary-header').outerHeight() - 
         $('.summary-actions').outerHeight() - $('.nav-tabs').outerHeight();
+    return height < 250 ? 250 : height;
 }
 
 function populateTabs(results) {
