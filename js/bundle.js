@@ -3045,12 +3045,19 @@ function makeTable($table, data) {
     });
 }
 
-function makeChart($chart, data, availableWidth, availableHeight, numericFieldName) {
+function findNumericFieldName(data) {
     // Infer 'total' field, for y axis
+    return _.find(_.keys(data[0]), function (k) {
+        // Look at first ten rows to try to find a numeric cell
+        return _.find(data.slice(0, 10), function (row) {
+            return _.isNumber(row[k]);
+        });
+    });
+}
+
+function makeChart($chart, data, availableWidth, availableHeight, numericFieldName) {
     if (!numericFieldName) {
-        numericFieldName = _.filter(_.keys(data[0]), function (k) {
-            return _.isNumber(data[0][k]);
-        })[0];
+        numericFieldName = findNumericFieldName(data);
     }
 
     // Set our margins
