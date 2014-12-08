@@ -7862,6 +7862,9 @@ h2 {
   display: none;
   margin-top: 25px;
 }
+.view-page .summary-actions-download-start {
+  display: none;
+}
 .view-page .summary .data-summary {
   min-height: 150px;
   position: relative;

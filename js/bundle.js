@@ -3227,7 +3227,13 @@ module.exports = {
             }
         });
 
-        $('.btn-download').attr('href', barnUrl + downloadEndpoint + window.location.search);
+        $('.btn-download')
+            .attr('href', barnUrl + downloadEndpoint + window.location.search)
+            .click(function () {
+                $('.summary-actions-download-start').show();
+                $(this).addClass('disabled');
+                return true;
+            });
 
         // Handle events
         $('.btn-hide').click(function () {
