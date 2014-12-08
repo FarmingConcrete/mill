@@ -140,6 +140,7 @@ function makeChart($chart, data, availableWidth, availableHeight, numericFieldNa
                 return '#6b812d';
             });
 
+    var yLabel = numericFieldName ? numericFieldName.replace(/_/g, ' ') : 'total';
     svg.append("text")
         .attr("class", "y label")
         .attr("text-anchor", "middle")
@@ -147,7 +148,7 @@ function makeChart($chart, data, availableWidth, availableHeight, numericFieldNa
         .attr("x", -(height / 2))
         .attr("dy", ".75em")
         .attr("transform", "rotate(-90)")
-        .text(numericFieldName.replace(/_/g, ' '));
+        .text(yLabel);
 }
 
 function loadData() {
