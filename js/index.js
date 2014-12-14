@@ -89,9 +89,9 @@ function loadAvailableFilters() {
 
 function loadOverview() {
     return $.getJSON(barnUrl + overviewEndpoint, function (data) {
-        $('.overview-gardens').text(data.gardens);
-        $('.overview-harvest-pounds').text(data.pounds_of_food);
-        $('.overview-compost-pounds').text(data.pounds_of_compost);
+        $('.overview-gardens').text(data.gardens.toLocaleString());
+        $('.overview-harvest-pounds').text(data.pounds_of_food.toLocaleString());
+        $('.overview-compost-pounds').text(data.pounds_of_compost.toLocaleString());
         $('.overview-list').slideDown();
     });
 }
