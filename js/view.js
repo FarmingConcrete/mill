@@ -12,6 +12,7 @@ var emptyMetricsTemplate = templates['view-empty-metrics.hbs'],
     tabsTemplate = templates['view-tabs.hbs'];
 
 require('../bower_components/bootstrap/js/tab');
+require('../bower_components/bootstrap/js/tooltip');
 require('../bower_components/datatables/media/js/jquery.dataTables.min');
 
 var barnUrl = CONFIG.barnUrl,
@@ -42,7 +43,19 @@ function makeTable($table, data) {
     if (gardenIndex >= 0) {
         var gardenColumn = columns[gardenIndex];
         columns.splice(gardenIndex, 1);
+        gardenColumn.className = 'column-garden';
         columns.push(gardenColumn);
+
+        $table.on('mouseover', 'th.column-garden', function () {
+            $(this)
+                .tooltip({
+                    placement: 'bottom',
+                    title: 'Garden names and precise locations have been ' +
+                           'anonymized. Garden IDs will be consistent ' +
+                           'within your downloaded file.'
+                })
+                .tooltip('show');
+        });
     }
 
     // Create table
