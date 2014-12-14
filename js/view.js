@@ -34,6 +34,17 @@ function makeTable($table, data) {
         })
         .value();
 
+    // Is there a garden column? If so, move it to the end
+    var gardenIndex = _.chain(columns)
+        .pluck('title')
+        .indexOf('garden')
+        .value();
+    if (gardenIndex >= 0) {
+        var gardenColumn = columns[gardenIndex];
+        columns.splice(gardenIndex, 1);
+        columns.push(gardenColumn);
+    }
+
     // Create table
     $table.dataTable({
         columns: columns,
