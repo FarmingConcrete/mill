@@ -8,7 +8,7 @@ this["JST"][["view-empty-metrics.hbs"]] = Handlebars.template({"1":function(dept
     + escapeExpression(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"name","hash":{},"data":data}) : helper)))
     + "\n        </li>\n";
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-  var stack1, buffer = "<div class=\"alert alert-warning\">\n    <p>No records found for these metrics:</p>\n    <ul>\n";
+  var stack1, buffer = "<div class=\"alert alert-warning\">\n    <p>No records found for these protocols:</p>\n    <ul>\n";
   stack1 = helpers.each.call(depth0, (depth0 != null ? depth0.metrics : depth0), {"name":"each","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
   return buffer + "    </ul>\n</div>\n";
@@ -20,7 +20,7 @@ this["JST"][["view-filters.hbs"]] = Handlebars.template({"compiler":[6,">= 2.0.0
   var helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
   return "<div class=\"filters-list-item\">\n    Where:\n    <span class=\"filters-list-item-value\">"
     + escapeExpression(((helpers.filterWhere || (depth0 && depth0.filterWhere) || helperMissing).call(depth0, (depth0 != null ? depth0.city : depth0), (depth0 != null ? depth0.state : depth0), (depth0 != null ? depth0.zip : depth0), {"name":"filterWhere","hash":{},"data":data})))
-    + "</span>\n</div>\n<div class=\"filters-list-item\">\n    Metrics:\n    <span class=\"filters-list-item-value\">"
+    + "</span>\n</div>\n<div class=\"filters-list-item\">\n    Protocols:\n    <span class=\"filters-list-item-value\">"
     + escapeExpression(((helpers.filterMetrics || (depth0 && depth0.filterMetrics) || helperMissing).call(depth0, (depth0 != null ? depth0.metric : depth0), {"name":"filterMetrics","hash":{},"data":data})))
     + "</span>\n</div>\n<div class=\"filters-list-item\">\n    When: \n    <span class=\"filters-list-item-value\">"
     + escapeExpression(((helpers.filterWhen || (depth0 && depth0.filterWhen) || helperMissing).call(depth0, (depth0 != null ? depth0.start : depth0), (depth0 != null ? depth0.end : depth0), {"name":"filterWhen","hash":{},"data":data})))

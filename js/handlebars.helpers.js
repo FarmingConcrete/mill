@@ -6,7 +6,7 @@ Handlebars.registerHelper('filterWhere', function (city, state, zip) {
 });
 
 Handlebars.registerHelper('filterMetrics', function (metrics) {
-    if (!metrics) return 'All metrics';
+    if (!metrics) return 'All protocols';
     if (!_.isArray(metrics)) return metrics;
     return metrics.join(', ');
 });
