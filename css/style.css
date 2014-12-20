@@ -7884,7 +7884,9 @@ h2 {
   position: relative;
 }
 .view-page .summary .tab-content {
+  border-bottom: 1px dotted #8c8c8c;
   margin-top: 50px;
+  padding-bottom: 15px;
 }
 .view-page .summary-no-data {
   display: none;
