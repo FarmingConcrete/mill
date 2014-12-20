@@ -3645,7 +3645,7 @@ function makeChart($chart, data, headers, availableWidth, availableHeight, numer
             }
         })
         .append("rect")
-            .attr("width", (width / histogram.length) * 0.25)
+            .attr("width", (width / histogram.length) * 0.4)
             .attr("y", function (d) {
                 return y(d.y1);
             })
