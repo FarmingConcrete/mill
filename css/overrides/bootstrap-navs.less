@@ -1,11 +1,24 @@
+@nav-tab-border-color: #bbb;
+
 .nav-tabs {
+    border-color: @nav-tab-border-color;
+
     > li {
         > a {
-            border: 1px solid lighten(@nav-tabs-border-color, 5%);
+            border: 1px solid @nav-tab-border-color;
             border-bottom-color: transparent;
             font-weight: bold;
-            margin-right: 5px;
+            margin-left: 10px;
+            margin-right: 10px;
             text-transform: uppercase;
+
+            &:hover {
+                border-color: darken(@nav-tab-border-color, 5%);
+            }
+        }
+
+        &.active > a {
+            border-color: @nav-tab-border-color;
         }
     }
 }
