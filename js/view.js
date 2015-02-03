@@ -188,6 +188,8 @@ function makeChart($chart, data, headers, availableWidth, availableHeight, numer
         .attr("dy", ".75em")
         .attr("transform", "rotate(-90)")
         .text(yLabel);
+
+    $chart.next().find('.metric-tab-chart-title-quantity').text(yLabel);
 }
 
 function loadData() {

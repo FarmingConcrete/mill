@@ -44,7 +44,7 @@ this["JST"][["view-tabs.hbs"]] = Handlebars.template({"1":function(depth0,helper
   var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
   return "    <div role=\"tabpanel\" class=\"tab-pane\" id=\""
     + escapeExpression(((helper = (helper = helpers.slug || (depth0 != null ? depth0.slug : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"slug","hash":{},"data":data}) : helper)))
-    + "\">\n        <div class=\"metric-tab-row\">\n            <div class=\"metric-tab-table\">\n                <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" class=\"metric-table\" height=\"100%\"></table>\n            </div>\n            <div class=\"metric-tab-chart\">\n                <div class=\"chart\"></div>\n            </div>\n        </div>\n    </div>\n";
+    + "\">\n        <div class=\"metric-tab-row\">\n            <div class=\"metric-tab-table\">\n                <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" class=\"metric-table\" height=\"100%\"></table>\n            </div>\n            <div class=\"metric-tab-chart\">\n                <div class=\"chart\"></div>\n                <div class=\"metric-tab-chart-title\">\n                    total <span class=\"metric-tab-chart-title-quantity\"></span> for all records\n                </div>\n            </div>\n        </div>\n    </div>\n";
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var stack1, buffer = "<ul class=\"nav nav-tabs\" role=\"tablist\">\n";
   stack1 = helpers.each.call(depth0, (depth0 != null ? depth0.metrics : depth0), {"name":"each","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
