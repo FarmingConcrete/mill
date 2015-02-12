@@ -226,8 +226,10 @@ function makeTabs($location, data) {
     // Create tabs for each metric
     var slugMetrics = _.map(metricsWithRecords, function (metric) {
         return {
+            group_number: metric.group_number,
             slug: slugifyMetricName(metric.name),
-            name: metric.name
+            name: metric.name,
+            number: metric.number
         };
     });
     $location.append(tabsTemplate({ metrics: slugMetrics }));

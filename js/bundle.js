@@ -3709,8 +3709,10 @@ function makeTabs($location, data) {
     // Create tabs for each metric
     var slugMetrics = _.map(metricsWithRecords, function (metric) {
         return {
+            group_number: metric.group_number,
             slug: slugifyMetricName(metric.name),
-            name: metric.name
+            name: metric.name,
+            number: metric.number
         };
     });
     $location.append(tabsTemplate({ metrics: slugMetrics }));
@@ -9225,6 +9227,10 @@ this["JST"][["view-tabs.hbs"]] = Handlebars.template({"1":function(depth0,helper
   return "    <li role=\"presentation\">\n        <a href=\"#"
     + escapeExpression(((helper = (helper = helpers.slug || (depth0 != null ? depth0.slug : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"slug","hash":{},"data":data}) : helper)))
     + "\" role=\"tab\" data-toggle=\"tab\">"
+    + escapeExpression(((helper = (helper = helpers.group_number || (depth0 != null ? depth0.group_number : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"group_number","hash":{},"data":data}) : helper)))
+    + "."
+    + escapeExpression(((helper = (helper = helpers.number || (depth0 != null ? depth0.number : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"number","hash":{},"data":data}) : helper)))
+    + " "
     + escapeExpression(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"name","hash":{},"data":data}) : helper)))
     + "</a>\n    </li>\n";
 },"3":function(depth0,helpers,partials,data) {
