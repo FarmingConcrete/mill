@@ -7858,7 +7858,10 @@ h2 {
   margin-top: 25px;
 }
 .view-page .filters-actions {
-  padding-top: 10px;
+  padding-top: 30px;
+}
+.view-page .filters-actions .btn-hide {
+  margin-left: 30px;
 }
 .view-page .filters-container {
   position: relative;
