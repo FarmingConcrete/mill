@@ -3635,17 +3635,18 @@ function makeChart($chart, data, headers, availableWidth, availableHeight, numer
         .attr("class", "y axis")
         .call(yAxis);
 
+    var barWidth = (width / histogram.length) * 0.4;
     var date = svg.selectAll(".date")
         .data(histogramData)
         .enter().append("g")
         .attr("class", "g")
         .attr("transform", function (d) {
             if (d.date) {
-                return "translate(" + x(d.date) + ",0)";
+                return "translate(" + (x(d.date) - (barWidth / 2.0)) + ",0)";
             }
         })
         .append("rect")
-            .attr("width", (width / histogram.length) * 0.4)
+            .attr("width", barWidth)
             .attr("y", function (d) {
                 return y(d.y1);
             })
