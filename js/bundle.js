@@ -3583,7 +3583,7 @@ function makeChart($chart, data, headers, availableWidth, availableHeight, numer
             return dateFormat.parse(d.recorded).getTime(); 
         }))
         .nice(d3.time.year)
-        .rangeRound([0, width - margin.left - margin.right]);
+        .rangeRound([0, width]);
     var y = d3.scale.linear().rangeRound([height, 0]);
 
     var histogram = d3.layout.histogram()
