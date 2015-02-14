@@ -3619,6 +3619,7 @@ function makeChart($chart, data, headers, availableWidth, availableHeight, numer
             date: d3.min(d, function (d) {
                 return dateFormat.parse(d.recorded).getTime(); 
             }),
+            gardens: d3.set(d.map(function (record) { return record.garden; })).size(),
             y0: y0,
             y1: y0 += d3.sum(d, function (d) { return +d[numericFieldName]; })
         });
@@ -3639,23 +3640,53 @@ function makeChart($chart, data, headers, availableWidth, availableHeight, numer
     var date = svg.selectAll(".date")
         .data(histogramData)
         .enter().append("g")
-        .attr("class", "g")
+        .attr("class", "g bar")
         .attr("transform", function (d) {
             if (d.date) {
                 return "translate(" + (x(d.date) - (barWidth / 2.0)) + ",0)";
             }
+        });
+
+    date.append("rect")
+        .attr("width", barWidth)
+        .attr("y", function (d) {
+            return y(d.y1);
         })
-        .append("rect")
-            .attr("width", barWidth)
-            .attr("y", function (d) {
-                return y(d.y1);
+        .attr("height", function (d) {
+            return y(d.y0) - y(d.y1);
+        });
+
+
+    var tooltip = d3.select('body')
+        .append('div')
+        .attr('class', 'chart-tooltip');
+
+    date.on('mouseover', function (d) {
+        var chartOffset = $('.chart:visible').offset(),
+            barX = chartOffset.left + x(d.date) - barWidth;
+        d3.select(this).classed('selected', true);
+        tooltip
+            .text('gardens recording data: ' + d.gardens)
+            .style('display', 'block')
+            .style('top', function () {
+                var $tooltip = $('.chart-tooltip'),
+                    barY = chartOffset.top + margin.top + y(d.y1) - $tooltip.outerHeight() - 15;
+                return barY + 'px';
             })
-            .attr("height", function (d) {
-                return y(d.y0) - y(d.y1);
-            })
-            .style("fill", function (d) {
-                return '#6b812d';
-            });
+            .style('left', barX + 'px');
+    });
+
+    date.on('mouseout', function () {
+        d3.select(this).classed('selected', false);
+        tooltip.style('display', 'none');
+    });
+
+    date.append('text')
+        .text(function(d) { return d3.format('.2s')(d.y1); })
+        .attr('y', function(d) { return y(d.y1) + 10; })
+        .attr('x', 5)
+        .style('stroke', '#FFF')
+        .style('font-size', '10px');
 
     var yLabel = numericFieldName ? numericFieldName : 'total';
     if (_.contains(_.keys(headers), yLabel)) {

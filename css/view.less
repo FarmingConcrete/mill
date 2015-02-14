@@ -1,3 +1,5 @@
+@bar-color: #6b812d;
+
 .axis {
     font: 12px sans-serif;
 }
@@ -103,6 +105,35 @@
             &-title {
                 text-align: center;
                 text-transform: capitalize;
+            }
+        }
+    }
+
+    .chart-tooltip {
+        background-color: white;
+        border: 1px solid black;
+        display: none;
+        font-size: 12px;
+        line-height: 15px;
+        padding: 5px;
+        position: absolute;
+        z-index: 10;
+    }
+
+    .chart {
+        .bar {
+            text {
+                cursor: default;
+            }
+        }
+
+        rect {
+            fill: @bar-color;
+        }
+
+        .selected {
+            rect {
+                fill: darken(@bar-color, 5%);
             }
         }
     }

@@ -7949,3 +7949,22 @@ h2 {
   text-align: center;
   text-transform: capitalize;
 }
+.view-page .chart-tooltip {
+  background-color: white;
+  border: 1px solid black;
+  display: none;
+  font-size: 12px;
+  line-height: 15px;
+  padding: 5px;
+  position: absolute;
+  z-index: 10;
+}
+.view-page .chart .bar text {
+  cursor: default;
+}
+.view-page .chart rect {
+  fill: #6b812d;
+}
+.view-page .chart .selected rect {
+  fill: #5b6e26;
+}
