@@ -180,17 +180,19 @@ function makeChart($chart, data, headers, availableWidth, availableHeight, numer
 
     date.on('mouseover', function (d) {
         var chartOffset = $('.chart:visible').offset(),
-            barX = chartOffset.left + x(d.date) - barWidth;
+            $tooltip = $('.chart-tooltip');
         d3.select(this).classed('selected', true);
         tooltip
-            .text('gardens recording data: ' + d.gardens)
+            .text('gardens recording data for this period: ' + d.gardens)
             .style('display', 'block')
             .style('top', function () {
-                var $tooltip = $('.chart-tooltip'),
-                    barY = chartOffset.top + margin.top + y(d.y1) - $tooltip.outerHeight() - 15;
+                var barY = chartOffset.top + margin.top + y(d.y1) - $tooltip.outerHeight() - 15;
                 return barY + 'px';
             })
-            .style('left', barX + 'px');
+            .style('left', function () {
+                var barX = chartOffset.left + margin.left + x(d.date) - ($tooltip.outerWidth() / 2);
+                return barX + 'px';
+            });
     });
 
     date.on('mouseout', function () {
