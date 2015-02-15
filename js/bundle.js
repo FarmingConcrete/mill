@@ -3620,6 +3620,9 @@ function makeChart($chart, data, headers, availableWidth, availableHeight, numer
                 return dateFormat.parse(d.recorded).getTime(); 
             }),
             gardens: d3.set(d.map(function (record) { return record.garden; })).size(),
+            maxDate: d3.max(d, function (d) {
+                return dateFormat.parse(d.recorded).getTime(); 
+            }),
             y0: y0,
             y1: y0 += d3.sum(d, function (d) { return +d[numericFieldName]; })
         });
@@ -3666,7 +3669,21 @@ function makeChart($chart, data, headers, availableWidth, availableHeight, numer
             $tooltip = $('.chart-tooltip');
         d3.select(this).classed('selected', true);
         tooltip
-            .text('gardens recording data for this period: ' + d.gardens)
+            .html(function () {
+                var minDate = new Date(d.date),
+                    maxDate = new Date(d.maxDate),
+                    minDateFormatted = moment(minDate).format('MMMM YYYY'),
+                    maxDateFormatted = moment(maxDate).format('MMMM YYYY'),
+                    tooltipDate = minDateFormatted + ' to ' + maxDateFormatted;
+
+                // If range would be redundant, just show one date
+                if (minDateFormatted === maxDateFormatted) {
+                    tooltipDate = minDateFormatted;
+                }
+                var tooltipText = '<div class="date">' + tooltipDate + '</div>';
+                tooltipText += 'gardens recording data for this period: ' + d.gardens;
+                return tooltipText;
+            })
             .style('display', 'block')
             .style('top', function () {
                 var barY = chartOffset.top + margin.top + y(d.y1) - $tooltip.outerHeight() - 15;
