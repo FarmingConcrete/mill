@@ -7961,6 +7961,9 @@ h2 {
 }
 .view-page .chart .bar text {
   cursor: default;
+  font-size: 10px;
+  stroke: #FFF;
+  text-anchor: middle;
 }
 .view-page .chart rect {
   fill: #6b812d;

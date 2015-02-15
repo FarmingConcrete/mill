@@ -203,9 +203,7 @@ function makeChart($chart, data, headers, availableWidth, availableHeight, numer
     date.append('text')
         .text(function(d) { return d3.format('.2s')(d.y1); })
         .attr('y', function(d) { return y(d.y1) + 10; })
-        .attr('x', 5)
-        .style('stroke', '#FFF')
-        .style('font-size', '10px');
+        .attr('x', barWidth / 2);
 
     var yLabel = numericFieldName ? numericFieldName : 'total';
     if (_.contains(_.keys(headers), yLabel)) {

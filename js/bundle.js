@@ -3683,12 +3683,14 @@ function makeChart($chart, data, headers, availableWidth, availableHeight, numer
         tooltip.style('display', 'none');
     });
 
+    console.log(barWidth / 2);
     date.append('text')
         .text(function(d) { return d3.format('.2s')(d.y1); })
         .attr('y', function(d) { return y(d.y1) + 10; })
-        .attr('x', 5)
+        .attr('x', barWidth / 2)
         .style('stroke', '#FFF')
-        .style('font-size', '10px');
+        .style('font-size', '10px')
+        .style('text-anchor', 'middle');
 
     var yLabel = numericFieldName ? numericFieldName : 'total';
     if (_.contains(_.keys(headers), yLabel)) {
