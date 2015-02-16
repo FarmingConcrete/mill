@@ -3660,7 +3660,9 @@ function makeChart($chart, data, headers, availableWidth, availableHeight, numer
         .attr("class", "g bar")
         .attr("transform", function (d) {
             if (d.date) {
-                return "translate(" + (x(d.date) - (barWidth / 2.0)) + ",0)";
+                // Put bar at beginning of nearest month
+                var month = moment(d.date).startOf('month');
+                return "translate(" + (x(month) - (barWidth / 2.0)) + ",0)";
             }
         });
 
