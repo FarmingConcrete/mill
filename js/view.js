@@ -113,8 +113,22 @@ function makeChart($chart, data, headers, availableWidth, availableHeight, numer
     // Use our X scale to set a bottom axis
     var xAxis = d3.svg.axis()
         .scale(x)
-        .ticks(d3.time.year)
+        .tickFormat(d3.time.format.multi([
+            ['%B', function(d) { return d.getMonth() === 6; }],
+            ['', function(d) { return d.getMonth() !== 0; }],
+            ['%Y', function() { return true; }]
+        ]))
         .orient("bottom");
+
+    // Choose granularity of ticks based on the number of years we are working
+    // with
+    var yearCount = x.invert(x.range()[1]).getYear() - x.invert(x.range()[0]).getYear();
+    if (yearCount <= 2) {
+        xAxis.ticks(d3.time.month);
+    }
+    else {
+        xAxis.ticks(d3.time.year);
+    }
 
     // Same for our left axis
     var yAxis = d3.svg.axis()
