@@ -106,7 +106,8 @@ function initIndexPage() {
                 $zip = $(':input[name=zip]');
 
             $(':input[type=date]').pickadate({
-                format: 'm/d/yy'
+                format: 'm/d/yy',
+                max: new Date()
             });
 
             $('select').select2();
