@@ -107,7 +107,8 @@ function initIndexPage() {
 
             $(':input[type=date]').pickadate({
                 format: 'm/d/yy',
-                max: new Date()
+                max: new Date(),
+                min: new Date(2010, 0, 1)
             });
 
             $('select').select2();
