@@ -1,10 +1,8 @@
-var $ = require('jquery');
 var _ = require('underscore');
 var qs = require('qs');
 var Spinner = require('spin.js');
 require('../bower_components/pickadate/lib/picker');
 require('../bower_components/pickadate/lib/picker.date');
-require('../bower_components/select2/select2.min');
 
 var initViewPage = require('./view').init;
 
