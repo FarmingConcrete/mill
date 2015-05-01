@@ -134,6 +134,7 @@ function makeChart($chart, data, headers, availableWidth, availableHeight, numer
     var yAxis = d3.svg.axis()
         .scale(y)
         .orient("left")
+        .ticks(5)
         .tickFormat(d3.format("s"));
 
     var svg = d3.select($chart[0]).append("svg")
