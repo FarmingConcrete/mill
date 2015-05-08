@@ -3320,7 +3320,7 @@ function setFilters(query) {
     $(':input[name=metric]').select2('val', parsed.metric);
 
     // Where
-    $(':input[name=state]').select2('val', parsed.state).trigger('change');
+    $(':input[name=state]').trigger('change').select2('val', parsed.state);
     $(':input[name=city]').select2('val', parsed.city);
     $(':input[name=zip]').select2('val', parsed.zip);
 
@@ -3391,10 +3391,10 @@ function initIndexPage() {
             $('select').select2();
 
             $(':input[name=state]').change(function () {
-                $city.select2('val', null)
-                    .find('option:gt(0)').remove();
-                $zip.select2('val', null)
-                    .find('option:gt(0)').remove();
+                $city.select2('val', null);
+                $city.find('option:gt(0)').remove();
+                $zip.select2('val', null);
+                $zip.find('option:gt(0)').remove();
 
                 var state = $(this).val();
 
