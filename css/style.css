@@ -6762,7 +6762,7 @@ fieldset[disabled] .btn-primary.active {
 .picker__nav--next:hover {
   background: white;
 }
-.select2-container.select2-container--default {
+.select2-container.select2 {
   width: 100% !important;
 }
 .select2-container .select2-selection {
