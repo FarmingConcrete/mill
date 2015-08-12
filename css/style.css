@@ -7230,6 +7230,9 @@ h2 {
     width: 50%;
   }
 }
+.view-page .metric-tab-table th {
+  min-width: 50px;
+}
 .view-page .metric-tab-table .dataTables_wrapper {
   overflow: auto;
 }
