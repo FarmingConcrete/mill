@@ -87,6 +87,7 @@ function loadAvailableFilters() {
 
 function loadOverview() {
     return $.getJSON(barnUrl + overviewEndpoint, function (data) {
+        $('.overview-cities').text(data.cities.toLocaleString());
         $('.overview-gardens').text(data.gardens.toLocaleString());
         $('.overview-harvest-pounds').text(data.pounds_of_food.toLocaleString());
         $('.overview-compost-pounds').text(data.pounds_of_compost.toLocaleString());

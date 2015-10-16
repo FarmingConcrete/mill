@@ -7074,11 +7074,12 @@ h2 {
   padding-left: 15px;
   padding-right: 15px;
   text-align: center;
+  width: 20% !important;
 }
 @media (min-width: 768px) {
   .main-index-page .overview-list-item {
     float: left;
-    width: 25%;
+    width: 16.66666667%;
   }
 }
 .main-index-page .overview-list-item-counting {
