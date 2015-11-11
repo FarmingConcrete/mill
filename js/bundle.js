@@ -3404,6 +3404,7 @@ function initMap() {
     // Add data
     var markers = L.markerClusterGroup({
         showCoverageOnHover: false,
+        singleMarkerMode: true,
         spiderfyOnMaxZoom: false,
         zoomToBoundsOnClick: false
     });
