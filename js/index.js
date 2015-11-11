@@ -1,6 +1,7 @@
 var _ = require('underscore');
 var qs = require('qs');
 var Spinner = require('spin.js');
+require('../bower_components/leaflet.markercluster/dist/leaflet.markercluster');
 require('../bower_components/pickadate/lib/picker');
 require('../bower_components/pickadate/lib/picker.date');
 
@@ -95,7 +96,42 @@ function loadOverview() {
     });
 }
 
+function initMap() {
+    var map = L.map('map', {
+        boxZoom: false,
+        center: [40.71, -73.98],
+        doubleClickZoom: false,
+        maxZoom: 8,
+        scrollWheelZoom: false,
+        touchZoom: false,
+        zoom: 8,
+        zoomControl: false
+    });
+
+    // Add base layer
+    L.tileLayer('https://{s}.tiles.mapbox.com/v3/{mapboxId}/{z}/{x}/{y}.png', {
+        attribution: 'Data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a>, Imagery &copy; <a href="http://mapbox.com">Mapbox</a>',
+        maxZoom: 18,
+        mapboxId: 'farmingconcrete.i29og38a'
+    }).addTo(map);
+
+    // Add data
+    var markers = L.markerClusterGroup({
+        showCoverageOnHover: false,
+        spiderfyOnMaxZoom: false,
+        zoomToBoundsOnClick: false
+    });
+    map.addLayer(markers);
+    $.getJSON(barnUrl + '/gardens/geojson/?records=yes', function (data) {
+        console.log(data);
+        markers.addLayer(L.geoJson(data));
+        map.fitBounds(markers.getBounds());
+    });
+}
+
 function initIndexPage() {
+    initMap();
+
     var overviewSpinner = new Spinner({}).spin($('.overview h2')[0]),
         filtersSpinner = new Spinner({}).spin($('.filters h2')[0]);
 
