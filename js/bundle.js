@@ -3409,7 +3409,6 @@ function initMap() {
     });
     map.addLayer(markers);
     $.getJSON(barnUrl + '/gardens/geojson/?records=yes', function (data) {
-        console.log(data);
         markers.addLayer(L.geoJson(data));
         map.fitBounds(markers.getBounds());
     });
