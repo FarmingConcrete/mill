@@ -314,7 +314,7 @@ function populateTabs(results) {
     _.each(results.metrics, function (metric) {
         var $tab = $('#' + slugifyMetricName(metric.name));
         makeTable($tab.find('.metric-table'), metric);
-        makeChart($tab.find('.chart'), metric.records, metric.headers, chartWidth, chartHeight);
+        makeChart($tab.find('.chart'), metric.records, metric.headers, chartWidth, chartHeight, metric.chart.y);
     });
 }
 
