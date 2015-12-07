@@ -41,9 +41,11 @@
   },
   "dependencies": {
     "handlebars": "^2.0.0",
+    "js-quantities": "^1.5.0",
+    "numeral": "^1.5.3",
     "qs": "^2.3.3",
     "slugify": "^0.1.0",
     "spin.js": "^2.0.1",
-    "underscore": "^1.7.0"
+    "underscore": "^1.8.3"
   }
 }

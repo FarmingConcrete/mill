@@ -1,9 +1,11 @@
 var _ = require('underscore'),
     slugify = require('slugify'),
     moment = require('../bower_components/moment/min/moment.min'),
+    numeral = require('numeral'),
     Handlebars = require('handlebars'),
     Spinner = require('spin.js'),
-    qs = require('qs');
+    qs = require('qs'),
+    Qty = require('js-quantities');
 
 var templates = require('../templates/dynamic/compiled')(Handlebars);
 require('./handlebars.helpers');
@@ -25,10 +27,17 @@ function makeTable($table, data) {
     var columns = _.chain(_.keys(data.records[0]))
         .map(function (column) {
             var title = data.headers[column] ? data.headers[column] : column.replace(/_/g, ' ');
-            return {
+            var columnDefinition = {
                 data: column,
                 title: title
             };
+            if (_.isNumber(data.records[0][column])) {
+                columnDefinition.type = 'num';
+                columnDefinition.render = function (data) {
+                    return numeral(data).format('0,0.0');
+                };
+            }
+            return columnDefinition;
         })
         .sortBy(function (column) {
             return column.title;
@@ -308,12 +317,38 @@ function findAvailableDataSummaryHeight() {
     return height < 250 ? 250 : height;
 }
 
+/*
+ * Find measurement columns in the data, if any, and convert the data to units
+ * that will be used to display the data.
+ */
+function convertMeasurementColumns(data) {
+    var measurementColumnNames = _.filter(_.keys(data.records[0]), function (key) {
+        var value = data.records[0][key];
+        return _.isObject(value) && _.has(value, 'magnitude') && _.has(value, 'units');
+    });
+
+    if (measurementColumnNames.length > 0) {
+        var convertedRecords = _.map(data.records, function (record) {
+            _.each(measurementColumnNames, function (key) {
+                var measurement = record[key],
+                    qty = Qty(measurement.magnitude + measurement.units);
+                var newUnits = CONFIG.preferredUnits[qty.kind()];
+                record[key + ' (' + newUnits + ')'] = qty.to(newUnits).scalar;
+                delete record[key];
+            });
+            return record;
+        });
+    }
+    return data;
+}
+
 function populateTabs(results) {
     var chartWidth = $('.chart:eq(0)').width(),
         chartHeight = findAvailableDataSummaryHeight();
     _.each(results.metrics, function (metric) {
         var $tab = $('#' + slugifyMetricName(metric.name));
-        makeTable($tab.find('.metric-table'), metric);
+        var convertedMetricData = convertMeasurementColumns(metric);
+        makeTable($tab.find('.metric-table'), convertedMetricData);
         makeChart($tab.find('.chart'), metric.records, metric.headers, chartWidth, chartHeight, metric.chart.y);
     });
 }
